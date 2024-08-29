@@ -1,5 +1,5 @@
+import React from "react";
 import DataTable from "react-data-table-component";
-
 function App() {
   const columns = [
     {
@@ -11,8 +11,13 @@ function App() {
     {
       Nombre: "Edad",
     },
+    {
+      Nombre: "DNI",
+    },
   ];
+
   const data = [];
+
   return (
     <div>
       <DataTable columns={columns} data={[]} />
