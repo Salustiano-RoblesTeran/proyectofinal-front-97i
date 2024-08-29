@@ -9,10 +9,11 @@ const Home = () => {
     <>
     <NavBar/>
     <HeroSection />
-    <div className="d-block flex-column gap-5">
     <SectionInfo />
+    <div className="m-2">
     <Section2 />
     </div>
+
     </>
   )
 }
