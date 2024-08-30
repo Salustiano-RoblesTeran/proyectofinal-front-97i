@@ -1,9 +1,16 @@
 import DataTable from "react-data-table-component";
-import { useEffect, useState } from "react";
-import App from "../App";
-import App from "./src/components/App";
+// import { useState } from "react";
 
 function App() {
+  // const [records, setRecords] = useState([]);
+
+  // const handleChange = (e) => {
+  //   const filteredRecords = data.filter((record) => {
+  //     return record.nombre.tolowercase().includes(e.target.value.tolowercase());
+  //   });
+  //   setRecords(filteredRecords);
+  // };
+
   const columns = [
     {
       name: "Nombre",
@@ -98,38 +105,9 @@ function App() {
       dni: "12345678",
     },
   ];
-  const [records, setRecords] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setRecords(data);
-      setLoading(false);
-    }),
-      2000;
-  });
-  const handleChange = (e) => {
-    const filteredRecords = data.filter((record) => {
-      return record.nombre.tolowercase().includes(e.target.value.tolowercase());
-    });
-    setRecords(filteredRecords);
-  };
-  return (
-    <div>
-      <input type="text" onChange={handleChange} />
-      <DataTable
-        title="DATOS DE USUARIOS"
-        columns={columns}
-        data={records}
-        selectableRows
-        pagination
-        paginationPerPage={3}
-        onSelectedRowsChange={(data) => console.log(data)}
-        fixedHeader
-        progressPending={loading}
-        progressComponent={<div>Cargando...</div>}
-      />
-    </div>
-  );
+
+  return;
+  <DataTable columns={columns} data={data} />;
 }
 
 export default App;
