@@ -7,8 +7,6 @@ const FormularioAgregar = ({ onAgregar }) => {
     email: "",
     dni: "",
     tel: "",
-    consulta: "",
-    turno: "",
   });
 
   const handleChange = (e) => {
@@ -21,24 +19,22 @@ const FormularioAgregar = ({ onAgregar }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const nuevoPaciente = {
+    const nuevoUsuario = {
       ...formData,
       id: new Date().getTime(),
     };
-    onAgregar(nuevoPaciente);
+    onAgregar(nuevoUsuario);
     setFormData({
       nombre: "",
       apellido: "",
       email: "",
       dni: "",
       tel: "",
-      consulta: "",
-      turno: "",
     });
   };
 
   return (
-    <div className="d-flex justify-content-center mt-4" widht="100%">
+    <div className="d-flex justify-content-center mt-4">
       <form className="p-4 rounded bg-dark" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="Nombre1" className="form-label text-light">
@@ -105,34 +101,8 @@ const FormularioAgregar = ({ onAgregar }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="consulta" className="form-label">
-            Consulta
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="consulta"
-            name="consulta"
-            value={formData.consulta}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="Turnos" className="form-label">
-            Turno
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="Turnos"
-            name="turno"
-            value={formData.turno}
-            onChange={handleChange}
-          />
-        </div>
         <button type="submit" className="btn btn-primary w-100">
-          Agregar Paciente
+          Agregar Usuario
         </button>
       </form>
     </div>

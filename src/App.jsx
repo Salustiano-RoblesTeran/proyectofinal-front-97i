@@ -1,42 +1,42 @@
 import React, { useState } from "react";
-import FormularyUser from "../src/Components/FormularyUser";
-import TablaUser from "../src/Components/TablaUser";
+import FormularioAgregar from "./Components/FormularioUsuario";
+import TablaUsuarios from "../src/Components/TablaUsuarios";
 
 const App = () => {
-  const [pacientes, setPacientes] = useState([]);
-  const [pacientesAceptados, setPacientesAceptados] = useState([]);
-  const [pacientesRechazados, setPacientesRechazados] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+  const [usuariosAceptados, setUsuariosAceptados] = useState([]);
+  const [usuariosRechazados, setUsuariosRechazados] = useState([]);
 
-  const agregarPaciente = (nuevoPaciente) => {
-    setPacientes([...pacientes, nuevoPaciente]);
+  const agregarUsuario = (nuevoUsuario) => {
+    setUsuarios([...usuarios, nuevoUsuario]);
   };
 
-  const aceptarPaciente = (id) => {
-    const pacienteAceptado = pacientes.find((paciente) => paciente.id === id);
-    setPacientes(pacientes.filter((paciente) => paciente.id !== id));
-    setPacientesAceptados([...pacientesAceptados, pacienteAceptado]);
+  const aceptarUsuario = (id) => {
+    const usuarioAceptado = usuarios.find((usuario) => usuario.id === id);
+    setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
+    setUsuariosAceptados([...usuariosAceptados, usuarioAceptado]);
   };
 
-  const rechazarPaciente = (id) => {
-    const pacienteRechazado = pacientes.find((paciente) => paciente.id === id);
-    setPacientes(pacientes.filter((paciente) => paciente.id !== id));
-    setPacientesRechazados([...pacientesRechazados, pacienteRechazado]);
+  const rechazarUsuario = (id) => {
+    const usuarioRechazado = usuarios.find((usuario) => usuario.id === id);
+    setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
+    setUsuariosRechazados([...usuariosRechazados, usuarioRechazado]);
   };
 
   return (
     <div className="container">
       <h1 className="text-left my-4 ">Gestión de Usuarios</h1>
-      <FormularyUser onAgregar={agregarPaciente} />
-      <h2>Pacientes Pendientes</h2>
-      <TablaUser
-        pacientes={pacientes}
-        onAceptar={aceptarPaciente}
-        onRechazar={rechazarPaciente}
+      <FormularioAgregar onAgregar={agregarUsuario} />
+      <h2>Usuarios Pendientes</h2>
+      <TablaUsuarios
+        usuarios={usuarios}
+        onAceptar={aceptarUsuario}
+        onRechazar={rechazarUsuario}
       />
-      <h2>Pacientes Aceptados</h2>
-      <TablaUser pacientes={pacientesAceptados} />
-      <h2>Pacientes Rechazados</h2>
-      <TablaUser pacientes={pacientesRechazados} />
+      <h2>Usuarios Aceptados</h2>
+      <TablaUsuarios Usuarios={usuariosAceptados} />
+      <h2>Usuarios Rechazados</h2>
+      <TablaUsuarios Usuarios={usuariosRechazados} />
     </div>
   );
 };
