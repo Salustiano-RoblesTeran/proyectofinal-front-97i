@@ -1,7 +1,11 @@
-import React from "react";
+import { createRoot } from "react-dom/client";
+import { StrictMode } from "react";
+import App from "./App.jsx";
 
-const main = () => {
-  return <div>main</div>;
-};
+const root = document.getElementById("root");
 
-export default main;
+createRoot(root).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
