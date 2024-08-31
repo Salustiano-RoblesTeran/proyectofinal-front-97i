@@ -1,7 +1,6 @@
 import React from "react";
-import Usuario from "../Components/Usuarios";
-
-const TablaUsuarios = ({ usuario, onAceptar, onRechazar }) => {
+import Usuarios from "../Components/Usuarios";
+const TablaUsuarios = ({ usuarios, onAceptar, onRechazar }) => {
   return (
     <div className="table-responsive">
       <table className="table table-striped table-bordered">
@@ -17,9 +16,9 @@ const TablaUsuarios = ({ usuario, onAceptar, onRechazar }) => {
         </thead>
         <tbody>
           {usuarios.map((usuario) => (
-            <Usuario
+            <Usuarios
               key={usuario.id}
-              Usuario={usuario}
+              usuario={usuario}
               onAceptar={onAceptar}
               onRechazar={onRechazar}
             />
