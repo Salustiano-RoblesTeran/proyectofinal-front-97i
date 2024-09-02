@@ -1,5 +1,4 @@
 import React from "react";
-
 const Usuario = ({ usuario, onAceptar, onRechazar }) => {
   return (
     <tr>

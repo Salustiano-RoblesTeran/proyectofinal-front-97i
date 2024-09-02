@@ -1,5 +1,5 @@
 import React from "react";
-import Usuarios from "../Components/Usuarios";
+import Usuario from "../Components/Usuarios";
 const TablaUsuarios = ({ usuarios, onAceptar, onRechazar }) => {
   return (
     <div className="table-responsive">
@@ -14,16 +14,16 @@ const TablaUsuarios = ({ usuarios, onAceptar, onRechazar }) => {
             {onAceptar && onRechazar && <th>Acciones</th>}
           </tr>
         </thead>
-        <tbody>
+        {/*   <tbody>
           {usuarios.map((usuario) => (
-            <Usuarios
+            <Usuario
               key={usuario.id}
               usuario={usuario}
               onAceptar={onAceptar}
               onRechazar={onRechazar}
             />
           ))}
-        </tbody>
+        </tbody> */}
       </table>
     </div>
   );

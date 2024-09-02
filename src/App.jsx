@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FormularioAgregar from "./Components/FormularioUsuario";
 import TablaUsuarios from "../src/Components/TablaUsuarios";
-import { ObjetoUsuarios } from "./Components/ObjetoUsuarios";
 
 const App = () => {
   const [usuarios, setUsuarios] = useState([]);
