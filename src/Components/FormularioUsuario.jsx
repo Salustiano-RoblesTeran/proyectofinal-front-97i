@@ -35,9 +35,12 @@ const FormularioAgregar = ({ onAgregar }) => {
 
   return (
     <div className="d-flex justify-content-center mt-4">
-      <form className="p-4 rounded bg-dark" onSubmit={handleSubmit}>
+      <form className="p-4 rounded" onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="Nombre1" className="form-label text-light">
+          <label
+            htmlFor="Nombre1"
+            className="form-label text-bg-light text-bg-dark"
+          >
             Nombre
           </label>
           <input
@@ -50,7 +53,10 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="Apellido1" className="form-label">
+          <label
+            htmlFor="Apellido1"
+            className="form-label text-bg-light text-bg-dark"
+          >
             Apellido
           </label>
           <input
@@ -63,7 +69,10 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">
+          <label
+            htmlFor="email"
+            className="form-label text-bg-light text-bg-dark"
+          >
             Email
           </label>
           <input
@@ -76,7 +85,10 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="dni" className="form-label">
+          <label
+            htmlFor="dni"
+            className="form-label text-bg-light text-bg-dark"
+          >
             DNI
           </label>
           <input
@@ -89,7 +101,10 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="Telefono" className="form-label">
+          <label
+            htmlFor="Telefono"
+            className="form-label text-bg-light text-bg-dark"
+          >
             Teléfono
           </label>
           <input

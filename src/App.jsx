@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import FormularioAgregar from "./Components/FormularioUsuario";
+import FormularioAgregar from "../src/Components/FormularioUsuario";
 import TablaUsuarios from "../src/Components/TablaUsuarios";
+import "./App.css";
 
 const App = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -24,19 +25,22 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="text-left my-4 ">Gestión de Usuarios</h1>
-      <FormularioAgregar onAgregar={agregarUsuario} />
-      <h2>Usuarios Pendientes</h2>
-      <TablaUsuarios
-        usuarios={usuarios}
-        onAceptar={aceptarUsuario}
-        onRechazar={rechazarUsuario}
-      />
-      <h2>Usuarios Aceptados</h2>
-      <TablaUsuarios Usuarios={usuariosAceptados} />
-      <h2>Usuarios Rechazados</h2>
-      <TablaUsuarios Usuarios={usuariosRechazados} />
+    <div className="container-fluid">
+      <h1 className="text-left mt-3 accordion ">PANEL DE USUARIOS</h1>
+
+      <div className="container">
+        <FormularioAgregar onAgregar={agregarUsuario} />
+        <h2>Usuarios Pendientes</h2>
+        <TablaUsuarios
+          usuarios={usuarios}
+          onAceptar={aceptarUsuario}
+          onRechazar={rechazarUsuario}
+        />
+        <h2>Usuarios Aceptados</h2>
+        <TablaUsuarios Usuarios={usuariosAceptados} />
+        <h2>Usuarios Rechazados</h2>
+        <TablaUsuarios Usuarios={usuariosRechazados} />
+      </div>
     </div>
   );
 };
