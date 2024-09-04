@@ -10,6 +10,7 @@ const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
 
     const indiceUltimoPaciente = paginaActual * pacientesPorPagina;
     const indicePrimerPaciente = indiceUltimoPaciente - pacientesPorPagina;
+    
     const pacientesActuales = pacientes.slice(indicePrimerPaciente, indiceUltimoPaciente);
 
     const handleVerHistoriaClinica = (paciente) => {
