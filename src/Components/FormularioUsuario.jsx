@@ -37,10 +37,7 @@ const FormularioAgregar = ({ onAgregar }) => {
     <div className="d-flex justify-content-center mt-4">
       <form className="p-4 rounded" onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label
-            htmlFor="Nombre1"
-            className="form-label text-bg-light text-bg-dark"
-          >
+          <label htmlFor="Nombre1" className="form-label text-bg-light">
             Nombre
           </label>
           <input
@@ -53,10 +50,7 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label
-            htmlFor="Apellido1"
-            className="form-label text-bg-light text-bg-dark"
-          >
+          <label htmlFor="Apellido1" className="form-label text-bg-light">
             Apellido
           </label>
           <input
@@ -69,10 +63,7 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label
-            htmlFor="email"
-            className="form-label text-bg-light text-bg-dark"
-          >
+          <label htmlFor="email" className="form-label text-bg-light ">
             Email
           </label>
           <input
@@ -85,10 +76,7 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label
-            htmlFor="dni"
-            className="form-label text-bg-light text-bg-dark"
-          >
+          <label htmlFor="dni" className="form-label text-bg-light ">
             DNI
           </label>
           <input
@@ -101,10 +89,7 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label
-            htmlFor="Telefono"
-            className="form-label text-bg-light text-bg-dark"
-          >
+          <label htmlFor="Telefono" className="form-label text-bg-light ">
             Teléfono
           </label>
           <input
@@ -116,7 +101,7 @@ const FormularioAgregar = ({ onAgregar }) => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary w-100">
+        <button type="submit" className="btn btn-primary w-100 ">
           Agregar Usuario
         </button>
       </form>

@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <div className="container-fluid">
-      <h1 className="text-left mt-3 accordion ">PANEL DE USUARIOS</h1>
+      <h1 className="text-left mt-3 mb-3">PANEL DE USUARIOS</h1>
 
       <div className="container">
         <FormularioAgregar onAgregar={agregarUsuario} />

@@ -1,6 +1,7 @@
 import React from "react";
-import Usuario from "./Usuarios";
-const TablaUsuarios = ({ usuarios, onAceptar, onRechazar }) => {
+import Usuario from "../Components/Usuarios";
+
+const TablaUsuarios = ({ usuario, onAceptar, onRechazar }) => {
   return (
     <div className="table-responsive ">
       <table className="table table-striped table-bordered">
@@ -14,32 +15,18 @@ const TablaUsuarios = ({ usuarios, onAceptar, onRechazar }) => {
             {onAceptar && onRechazar && <th>Acciones</th>}
           </tr>
         </thead>
-        <tbody>
-          <tbody>
-            {Array.isArray(usuarios) && usuarios.length > 0 ? (
-              usuarios.map((usuario) => (
-                <Usuario
-                  key={usuario.id}
-                  usuario={usuario}
-                  onAceptar={onAceptar}
-                  onRechazar={onRechazar}
-                />
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan={onAceptar && onRechazar ? 6 : 5}
-                  className="text-center"
-                >
-                  No hay usuarios disponibles...
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </tbody>
+        {/*   <tbody>
+          {usuario.map((usuario) => (
+            <Usuario
+              key={usuario.id}
+              usuario={usuario}
+              onAceptar={onAceptar}
+              onRechazar={onRechazar}
+            />
+          ))}
+        </tbody> */}
       </table>
     </div>
   );
 };
-
 export default TablaUsuarios;
