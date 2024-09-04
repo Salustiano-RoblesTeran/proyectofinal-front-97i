@@ -1,7 +1,36 @@
 import React from 'react';
+import { useState } from 'react';
 
 const Registrarse = ({ show, handleClose }) => {
   if (!show) return null;
+
+ // Estado para todos los campos
+  const [formValues, setFormValues] = useState({
+    nombre: "",
+    apellido: "",
+    edad: "",
+    ciudad: "",
+    email: "",
+    password: ""
+});
+
+const { nombre, apellido, edad, ciudad, email, password } = formValues;
+
+const handleChange = (event) => {
+    setFormValues({
+        ...formValues, [event.target.name]: event.target.value
+    });
+
+  };
+
+
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  // Guardar valores en arreglo
+  console.log(formValues); //! muestro los valores ingresados, nos servira para usarlos en la ApiLogin conectado con el back
+
+  }
 
   return (
     <div className="modal fade show d-block" id="staticBackdropRegistar" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -12,15 +41,17 @@ const Registrarse = ({ show, handleClose }) => {
             <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <form id="formularioRegistro">
+            <form id="formularioRegistro" onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-sm-12 col-md-6 my-2 mx-auto">
                   <label htmlFor="nombre" className="form-label">Nombre</label>
                   <input
                     type="text"
                     className="form-control"
-                    id="nombre"
+                    name="nombre"
                     placeholder="Ingrese su nombre"
+                    value={formValues.nombre}
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -29,8 +60,10 @@ const Registrarse = ({ show, handleClose }) => {
                   <input
                     type="text"
                     className="form-control"
-                    id="apellido"
+                    name="apellido"
                     placeholder="Ingrese su apellido"
+                    value={formValues.apellido}
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -40,19 +73,23 @@ const Registrarse = ({ show, handleClose }) => {
                 <input
                   type="text"
                   className="form-control"
-                  id="edad"
+                  name="edad"
                   pattern="[0-9]{2}"
                   placeholder="Ingrese su edad"
+                  value={formValues.edad}
+                  onChange={handleChange}
                   required
                 />
               </div>
               <div className="col my-2 mx-auto">
-                <label htmlFor="departamento" className="form-label">Departamento</label>
+                <label htmlFor="departamento" className="form-label">Ciudad</label>
                 <input
                   type="text"
                   className="form-control"
-                  id="departamento"
-                  placeholder="Ingrese su departamento"
+                  name="ciudad"
+                  placeholder="Ingrese su ciudad"
+                  value={formValues.ciudad}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -61,10 +98,12 @@ const Registrarse = ({ show, handleClose }) => {
                 <input
                   type="email"
                   className="form-control"
-                  id="exampleInputEmail1"
+                  name="email"
                   pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
                   aria-describedby="emailHelp"
                   placeholder="Ingrese su email"
+                  value={formValues.email}
+                  onChange={handleChange}
                   required
                 />
                 <div id="emailHelp" className="form-text">
@@ -76,14 +115,16 @@ const Registrarse = ({ show, handleClose }) => {
                 <input
                   type="password"
                   className="form-control"
-                  id="password"
+                  name="password"
                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                   aria-describedby="contraseñaHelp"
                   placeholder="Ingrese su contraseña"
+                  value={formValues.password}
+                  onChange={handleChange}
                   required
                 />
                 <div id="contraseñaHelp" className="form-text">
-                  Your password must contain at least 8 characters, at least one number and one uppercase and lowercase letter
+                Tu contraseña debe contener al menos 8 caracteres, al menos un número y una letra mayúscula y minúscula
                 </div>
               </div>
               <div className="col my-2 mx-auto">
@@ -96,7 +137,7 @@ const Registrarse = ({ show, handleClose }) => {
                   placeholder="Confirmar contraseña"
                   required
                 />
-                <div id="contraseñaHelp" className="form-text">Enter the same password</div>
+                <div id="contraseñaHelp" className="form-text">Vuelva a ingresar la contraseña</div>
               </div>
               <button type="submit" className="btn btn-primary" id="button_submit">Crear cuenta</button>
             </form>
