@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const IniciarSesion = ({ show, handleClose }) => {
   if (!show) return null;
+
+  // Estado para todos los campos
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  })
+
+  const { email, password } = formValues;
+
+  const handleChange = (event) => {
+
+      setFormValues({
+        // ... es el spreads operator
+          ...formValues, [event.target.name]: event.target.value
+      });
+
+    };
+
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+
+      console.log(formValues);
+
+      //! AQUI HACEMOS LA PETICION AL BACK
+    }
 
   return (
     <div className="modal fade show d-block" id="staticBackdropLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -12,14 +38,16 @@ const IniciarSesion = ({ show, handleClose }) => {
             <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <form id="formularioLogin">
+            <form id="formularioLogin" onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="login_username" className="form-label">Ingrese su mail</label>
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
-                  id="login_username"
+                  name='email'
                   placeholder="Ingrese su mail"
+                  value={formValues.email}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -28,8 +56,10 @@ const IniciarSesion = ({ show, handleClose }) => {
                 <input
                   type="password"
                   className="form-control"
-                  id="login_password"
+                  name="password"
                   placeholder="Ingrese contraseña"
+                  value={formValues.password}
+                  onChange={handleChange}
                   required
                 />
               </div>
