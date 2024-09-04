@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-const IniciarSesion = ({ show, handleClose }) => {
+import { useNavigate } from "react-router-dom";
+
+const IniciarSesion = ({ show, handleClose, iniciarSesion, guardarUsuario }) => {
+  // const navigate = useNavigate(); // defino función para redireccionar
+  
   if (!show) return null;
 
   // Estado para todos los campos
@@ -25,6 +29,7 @@ const IniciarSesion = ({ show, handleClose }) => {
       event.preventDefault();
 
       console.log(formValues);
+      // navigate("/");
 
       //! AQUI HACEMOS LA PETICION AL BACK
     }
