@@ -15,16 +15,16 @@ const TablaUsuarios = ({ usuario, onAceptar, onRechazar }) => {
             {onAceptar && onRechazar && <th>Acciones</th>}
           </tr>
         </thead>
-        {/*   <tbody>
-          {usuario.map((usuario) => (
+        <tbody>
+          {usuario.map((user) => (
             <Usuario
-              key={usuario.id}
-              usuario={usuario}
+              key={user.id}
+              usuario={user.nombre}
               onAceptar={onAceptar}
               onRechazar={onRechazar}
             />
           ))}
-        </tbody> */}
+        </tbody>
       </table>
     </div>
   );
