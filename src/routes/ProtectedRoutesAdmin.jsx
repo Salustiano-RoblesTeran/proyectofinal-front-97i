@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoutesAdmin = ({ children, user }) => {
-    if (user.rol === "ADMIN_ROLE") {
+    if (user === "ADMIN_ROLE") {
         return children;
       } else {
         return <Navigate to="/" />;
