@@ -1,13 +1,15 @@
 import React from "react";
 
 const Usuario = ({ usuario, onAceptar, onRechazar }) => {
+  console.log(usuario);  // Verifica que el objeto usuario contenga todas las propiedades necesarias
+
   return (
     <tr>
       <td>{usuario.nombre}</td>
       <td>{usuario.apellido}</td>
       <td>{usuario.email}</td>
       <td>{usuario.dni}</td>
-      <td>{usuario.tel}</td>
+      <td>{usuario.tel}</td>  
       {onAceptar && onRechazar && (
         <td>
           <button

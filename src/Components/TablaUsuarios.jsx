@@ -1,5 +1,5 @@
 import React from "react";
-import Usuario from "../Components/Usuarios";
+import Usuario from "./Usuario";
 
 const TablaUsuarios = ({ usuario, onAceptar, onRechazar }) => {
   return (
@@ -19,7 +19,7 @@ const TablaUsuarios = ({ usuario, onAceptar, onRechazar }) => {
           {usuario.map((user) => (
             <Usuario
               key={user.id}
-              usuario={user.nombre}
+              usuario={user} 
               onAceptar={onAceptar}
               onRechazar={onRechazar}
             />

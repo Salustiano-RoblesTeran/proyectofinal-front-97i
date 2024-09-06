@@ -32,14 +32,14 @@ const App = () => {
         <FormularioAgregar onAgregar={agregarUsuario} />
         <h2>Usuarios Pendientes</h2>
         <TablaUsuarios
-          usuarios={usuarios}
+          usuario={usuarios}  // Corregido: pasar 'usuario' como prop
           onAceptar={aceptarUsuario}
           onRechazar={rechazarUsuario}
         />
         <h2>Usuarios Aceptados</h2>
-        <TablaUsuarios Usuarios={usuariosAceptados} />
+        <TablaUsuarios usuario={usuariosAceptados} /> 
         <h2>Usuarios Rechazados</h2>
-        <TablaUsuarios Usuarios={usuariosRechazados} />
+        <TablaUsuarios usuario={usuariosRechazados} />
       </div>
     </div>
   );
