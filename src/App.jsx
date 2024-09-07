@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FormularioAgregar from '../src/components/Formulario';
+
 import TablaPacientes from '../src/components/TablaPacientes';
 
 const App = () => {
@@ -26,7 +26,7 @@ const App = () => {
     return (
         <div className="container">
             <h1 className="text-center my-4">Gestión de Pacientes</h1>
-            <FormularioAgregar onAgregar={agregarPaciente} />
+        
             <h2>Pacientes Pendientes</h2>
             <TablaPacientes pacientes={pacientes} onAceptar={aceptarPaciente} onRechazar={rechazarPaciente} />
             <h2>Pacientes Aceptados</h2>
