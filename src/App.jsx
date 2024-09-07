@@ -60,7 +60,7 @@ const App = () => {
   return (
     <div className="container-fluid">
       <h1 className="titulo-principal">PANEL DE USUARIOS</h1>
-
+      <ListaMedicos />
       <div className="container-tabla">
         <FormularioAgregar onAgregar={agregarUsuario} />
         <h2>TURNOS REALIZADOS</h2>
