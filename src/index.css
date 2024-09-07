@@ -19,13 +19,13 @@ form {
 }
 
 .form-control {
-    max-width: 400px; /* Establece un ancho máximo para los inputs */
+    max-width: 400px; 
     padding: 0.5rem; /* Añade espacio dentro de los inputs */
     box-sizing: border-box;
     width: 100%;
     
 }
 button{ 
-    width: 50%; /* Establece el ancho del botón */
+    width: 50%; 
     align-self: center;
 }
