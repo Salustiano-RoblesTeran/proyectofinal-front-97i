@@ -4,6 +4,32 @@ import TablaUsuarios from "../src/Components/TablaUsuarios";
 import "./App.css";
 import ListaMedicos from "../src/Components/ListaMedicos";
 
+/* const generarId = () => {
+  return Date.now();
+};
+
+const generarFecha = () => {
+  const fecha = new Date();
+  const dia = fecha.getDate();
+  const mes = fecha.getMonth() + 1;
+  const anio = fecha.getFullYear();
+  const hora = fecha.getHours();
+  const minuto = fecha.getMinutes();
+  const segundo = fecha.getSeconds();
+  return `${dia}/${mes}/${anio} ${hora}:${minuto}:${segundo}`;
+};
+
+const generarTurno = () => {
+  const fecha = new Date();
+  const dia = fecha.getDate();
+  const mes = fecha.getMonth() + 1;
+  const anio = fecha.getFullYear();
+  const hora = fecha.getHours();
+  const minuto = fecha.getMinutes();
+  const segundo = fecha.getSeconds();
+  return `${dia}/${mes}/${anio} ${hora}:${minuto}:${segundo}`;
+}; */
+
 const App = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [usuariosAceptados, setUsuariosAceptados] = useState([]);

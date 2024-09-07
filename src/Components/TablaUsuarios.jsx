@@ -1,5 +1,7 @@
 import React from "react";
 import Usuario from "./Usuario";
+import "../App.css";
+import "../Components/ListaMedicos";
 
 const TablaUsuarios = ({ usuario, onAceptar, onRechazar, onSolicitar }) => {
   return (
