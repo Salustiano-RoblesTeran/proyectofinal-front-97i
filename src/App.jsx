@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import FormularioAgregar from "../src/Components/FormularioUsuario";
 import TablaUsuarios from "../src/Components/TablaUsuarios";
 import "./App.css";
+import ListaMedicos from "../src/Components/ListaMedicos";
 
 const App = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [usuariosAceptados, setUsuariosAceptados] = useState([]);
   const [usuariosRechazados, setUsuariosRechazados] = useState([]);
+  const [usuariosSolicitados, setUsuariosSolicitados] = useState([]);
 
   const agregarUsuario = (nuevoUsuario) => {
     setUsuarios([...usuarios, nuevoUsuario]);
@@ -23,23 +25,31 @@ const App = () => {
     setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
     setUsuariosRechazados([...usuariosRechazados, usuarioRechazado]);
   };
+  const solicitarUsuario = (id) => {
+    const usuarioSolicitado = usuarios.find((usuario) => usuario.id === id);
+    setUsuarios(usuarios.filter((usuario) => usuario.id !== id));
+    setUsuariosSolicitados([...usuariosSolicitados, usuarioSolicitado]);
+  };
 
   return (
     <div className="container-fluid">
-      <h1 className="text-left mt-3 mb-3">PANEL DE USUARIOS</h1>
+      <h1 className="titulo-principal">PANEL DE USUARIOS</h1>
 
-      <div className="container">
+      <div className="container-tabla">
         <FormularioAgregar onAgregar={agregarUsuario} />
-        <h2>Usuarios Pendientes</h2>
+        <h2>TURNOS REALIZADOS</h2>
         <TablaUsuarios
-          usuario={usuarios}  // Corregido: pasar 'usuario' como prop
+          usuario={usuarios} // Corregido: pasar 'usuario' como prop
           onAceptar={aceptarUsuario}
           onRechazar={rechazarUsuario}
+          onSolicitar={solicitarUsuario}
         />
-        <h2>Usuarios Aceptados</h2>
-        <TablaUsuarios usuario={usuariosAceptados} /> 
-        <h2>Usuarios Rechazados</h2>
+        <h2>TURNOS RECHAZADOS</h2>
         <TablaUsuarios usuario={usuariosRechazados} />
+        <h2>TURNOS EN ESPERA/SOLICITADOS</h2>
+        <TablaUsuarios usuario={usuariosSolicitados} />
+        <h2>TURNOS ACEPTADOS</h2>
+        <TablaUsuarios usuario={usuariosAceptados} />
       </div>
     </div>
   );

@@ -1,27 +1,30 @@
 import React from "react";
 import Usuario from "./Usuario";
 
-const TablaUsuarios = ({ usuario, onAceptar, onRechazar }) => {
+const TablaUsuarios = ({ usuario, onAceptar, onRechazar, onSolicitar }) => {
   return (
     <div className="table-responsive ">
       <table className="table table-striped table-bordered">
         <thead className="thead-dark">
           <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>DNI</th>
-            <th>Teléfono</th>
-            {onAceptar && onRechazar && <th>Acciones</th>}
+            <th className="text-center">Nombre</th>
+            <th className="text-center">Apellido</th>
+            <th className="text-center">Email</th>
+            <th className="text-center">DNI</th>
+            <th className="text-center">Teléfono</th>
+            <th className="text-center">Fecha del turno</th>
+            <th className="text-center">Horario del turno</th>
+            {onAceptar && onRechazar && onSolicitar && <th> Acciones </th>}
           </tr>
         </thead>
         <tbody>
           {usuario.map((user) => (
             <Usuario
               key={user.id}
-              usuario={user} 
+              usuario={user}
               onAceptar={onAceptar}
               onRechazar={onRechazar}
+              onSolicitar={onSolicitar}
             />
           ))}
         </tbody>

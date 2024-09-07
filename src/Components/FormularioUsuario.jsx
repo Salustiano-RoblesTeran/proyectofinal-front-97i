@@ -7,6 +7,8 @@ const FormularioAgregar = ({ onAgregar }) => {
     email: "",
     dni: "",
     tel: "",
+    Fecha: "",
+    Horario: "",
   });
 
   const handleChange = (e) => {
@@ -30,14 +32,26 @@ const FormularioAgregar = ({ onAgregar }) => {
       email: "",
       dni: "",
       tel: "",
+      Fecha: "",
+      Horario: "",
+    });
+    alert("Turno realizado con exito");
+    fetch("https://jsonplaceholder.typicode.com/users", {
+      method: "POST",
+      body: JSON.stringify(nuevoUsuario),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }).then((response) => {
+      console.log(response);
     });
   };
 
   return (
-    <div className="d-flex justify-content-center mt-4">
-      <form className="p-4 rounded" onSubmit={handleSubmit}>
+    <div className="tabla-formulario">
+      <form className="p-4" onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="Nombre1" className="form-label text-bg-light">
+          <label htmlFor="Nombre1" className="componentes-tabla">
             Nombre
           </label>
           <input
@@ -50,7 +64,7 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="Apellido1" className="form-label text-bg-light">
+          <label htmlFor="Apellido1" className="componentes-tabla">
             Apellido
           </label>
           <input
@@ -63,7 +77,7 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label text-bg-light ">
+          <label htmlFor="email" className="componentes-tabla ">
             Email
           </label>
           <input
@@ -76,11 +90,11 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="dni" className="form-label text-bg-light ">
+          <label htmlFor="dni" className="componentes-tabla ">
             DNI
           </label>
           <input
-            type="text"
+            type="dni"
             className="form-control"
             id="dni"
             name="dni"
@@ -89,11 +103,11 @@ const FormularioAgregar = ({ onAgregar }) => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="Telefono" className="form-label text-bg-light ">
+          <label htmlFor="Telefono" className="componentes-tabla ">
             Teléfono
           </label>
           <input
-            type="text"
+            type="Telefono"
             className="form-control"
             id="Telefono"
             name="tel"
@@ -101,8 +115,34 @@ const FormularioAgregar = ({ onAgregar }) => {
             onChange={handleChange}
           />
         </div>
+        <div className="mb-3">
+          <label htmlFor="Fecha del turno" className="componentes-tabla ">
+            Fecha del turno
+          </label>
+          <input
+            type="Fecha del turno"
+            className="form-control"
+            id="Fecha"
+            name="Fecha"
+            value={formData.Fecha}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="Horario del turno" className="componentes-tabla ">
+            Horario del turno
+          </label>
+          <input
+            type="Horario del turno"
+            className="form-control"
+            id="Horario"
+            name="Horario"
+            value={formData.Horario}
+            onChange={handleChange}
+          />
+        </div>
         <button type="submit" className="btn btn-primary w-100 ">
-          Agregar Usuario
+          Reservar turno
         </button>
       </form>
     </div>
