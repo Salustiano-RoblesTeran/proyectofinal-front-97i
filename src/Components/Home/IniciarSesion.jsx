@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import { useNavigate } from "react-router-dom";
 
 const IniciarSesion = ({ show, handleClose, iniciarSesion, guardarUsuario }) => {
   // const navigate = useNavigate(); // defino función para redireccionar

@@ -6,29 +6,24 @@ import 'slick-carousel/slick/slick-theme.css';
 const CardSlider = () => {
   const doctors = [
     {
-      name: "Dr. John Doe",
+      name: "Dr. Jorge Garcia Pinna",
       description: "Cardiólogo con más de 10 años de experiencia.",
-      image: "https://via.placeholder.com/150",
+      image: "https://www.centrogalvez.com.ar/wp-content/uploads/2017/01/G_garcia-pinna-343x255.png",
     },
     {
-      name: "Dra. Jane Smith",
-      description: "Especialista en dermatología.",
-      image: "https://via.placeholder.com/150",
+      name: "Dra. Eduardo Galvez",
+      description: "Diagnostico por imagenes / Tomografia multicorte / Resonancia magenetica de alto campo",
+      image: "https://centrogalvez.com.ar/wp-content/uploads/2017/01/Dr.-Eduardo-Galvez-343x255.png",
     },
     {
-      name: "Dr. Michael Brown",
-      description: "Cirujano ortopédico.",
-      image: "https://via.placeholder.com/150",
+      name: "Dr Claudia Morales",
+      description: "Especialista en clinica pediatra",
+      image: "https://www.centrogalvez.com.ar/wp-content/uploads/2016/12/g-dramorales-1-343x255.png",
     },
     {
       name: "Dra. Emily White",
-      description: "Pediatra con una gran pasión por los niños.",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      name: "Dr. Chris Johnson",
-      description: "Endocrinólogo especializado en diabetes.",
-      image: "https://via.placeholder.com/150",
+      description: "Clinico Medico / Radiologia digital / Ecografia",
+      image: "https://www.centrogalvez.com.ar/wp-content/uploads/2017/11/g-drramirez-343x255.png",
     },
   ];
 

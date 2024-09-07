@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoutesMedico = ({ children, user }) => {
-    if (user.rol === "MEDICO_ROLE") {
+    if (user === "MEDICO_ROLE") {
         return children;
       } else {
         return <Navigate to="/" />;

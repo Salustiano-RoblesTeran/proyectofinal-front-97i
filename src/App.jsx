@@ -3,60 +3,80 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './App.css'
-import Home from './Pages/HomeScreen'
-import Footer from "./Components/Common/Footer"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProtectedRoutes from './routes/ProtectedRoutes';
+
+import './App.css'
+import NavBar from "./Components/Common/NavBar"
+import Footer from "./Components/Common/Footer"
+
+
 import RoutesApp from './routes/RoutesApp';
 import HomeScreen from './Pages/HomeScreen';
-import IniciarSesion from './Components/Home/IniciarSesion';
+import AdminScreen from './Pages/AdminScreen';
+import PerfilScreen from './Pages/PerfilScreen';
+
+import ProtectedRoutes from './routes/ProtectedRoutes';
+import ProtectedRoutesAdmin from './routes/ProtectedRoutesAdmin';
+import AboutScreen from './Pages/AboutScreen';
 
 function App() {
 
+
   // Estados para manejar login y datos de usuario
-  const [login, setLogin] = useState(false);
-  const [user, setUser] = useState(null);
-
-  // Funcion para guardar datos del usuario autenticado
-  const guardarUsuario = (usuario) => {
-    setUser(datos);
-  }
-
-  // Funcion cuando inicia sesion
-  const iniciarSesion = () => {
-    setLogin(true);
-  }
+  const [login, setLogin] = useState(true);
+  const [user, setUser] = useState("USER_ROLE");
 
   // Funcion para cerrar sesion 
   const cerrarSesion = () => {
     setLogin(false);
+    setUser(null); // Limpia el usuario al cerrar sesión
   }
 
+
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
+      <>
+        {/* NavBar siempre presente */}
+        <NavBar cerrarSesion={cerrarSesion} user={user} login={login}/>
+
         <Routes>
+          {/* Ruta de inicio */}
+          <Route path="/" element={<HomeScreen />} />
+
+
+          {/* Ruta pública "Sobre Nosotros" */}
+          <Route path="/about" element={<AboutScreen/>} />
+
+
+            {/* Rutas protegidas que reciben login, datos de usuario y función cerrar sesión */}
+
+
+          <Route path="/perfil" element={
+          <ProtectedRoutes login={login}>
+            <PerfilScreen/>
+          </ProtectedRoutes>
+        }/>
+
+        <Route path="/admin" element={
+          <ProtectedRoutesAdmin user={user}>
+            <AdminScreen/>
+          </ProtectedRoutesAdmin>
+        }/>
+
           {/* Rutas protegidas que reciben login, datos de usuario y función cerrar sesión */}
-          <Route path='/*' element={
+          <Route path="/*" element={
             <ProtectedRoutes login={login}>
                 <RoutesApp cerrarSesion={cerrarSesion} user={user}/>
             </ProtectedRoutes>
-          }
-          />
+          }/>
 
-          {/* Ruta de Login que recibe función para iniciar sesión y guardar datos de usuario*/}
-          <Route path='/login' element={
-            <IniciarSesion iniciarSesion={iniciarSesion} guardarUsuario={guardarUsuario}/>
-          }
-          />
 
         </Routes>
-      </BrowserRouter>
 
-      <Home/>
-      <Footer/>
-    </>
+        <Footer/>
+      </>
+    </BrowserRouter>
   )
 }
 
+export default App;
