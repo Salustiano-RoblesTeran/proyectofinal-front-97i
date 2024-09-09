@@ -6,7 +6,6 @@ const Paciente = ({ paciente, onAceptar, onRechazar, onVerHistoriaClinica }) => 
             <td>{paciente.nombre}</td>
             <td>{paciente.apellido}</td>
             <td>{paciente.email}</td>
-            <td>{paciente.dni}</td>
             <td>{paciente.tel}</td>
             <td>{paciente.consulta}</td>
             <td>{paciente.turno}</td>
