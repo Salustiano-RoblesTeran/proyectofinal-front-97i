@@ -1,19 +1,25 @@
-const url = "http://localhost:3000/api/login";  // Añadir "http://"
+const url = "http://localhost:3000/api/login";
 
 export const authLogin = async (datos) => {
     try {
-        const resp = await fetch(url, {
+
+        const response = await fetch(url, {
             method: "POST",
             body: JSON.stringify(datos),
             headers: {
-                "Content-type": "application/json; charset=UTF-8",
+                "Content-Type": "application/json; charset=UTF-8",
             },
         });
-        const data = await resp.json();
-        return data;
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error en la respuesta del servidor:', errorData);
+            throw new Error(errorData.message || 'Error en la autenticación');
+        }
+
+        return await response.json();
     } catch (error) {
-        // los errores
         console.log("Error en la conexión con el servidor:", error);
-        return { msg: "No se conectó con backend" };
+        return { msg: error.message || 'No se conectó con el backend' };
     }
-}
+};
