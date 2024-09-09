@@ -7,11 +7,12 @@ const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
     const [paginaActual, setPaginaActual] = useState(1);
     const pacientesPorPagina = 5;
     const [historiaClinica, setHistoriaClinica] = useState('');
+
     // Obtener turnos del backend
     useEffect(() => {
         const fetchAppointments = async () => {
             try {
-                const response = await fetch('/api/appointments');
+                const response = await fetch('/getAppointments');
                 const data = await response.json();
                 setPacientes(data.appointments); 
             } catch (error) {
