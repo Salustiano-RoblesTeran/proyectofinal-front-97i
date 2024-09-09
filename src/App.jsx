@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -6,10 +5,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import './App.css'
 import NavBar from "./Components/Common/NavBar"
 import Footer from "./Components/Common/Footer"
-
 
 import RoutesApp from './routes/RoutesApp';
 import HomeScreen from './Pages/HomeScreen';
@@ -22,79 +19,54 @@ import ProtectedRoutesAdmin from './routes/ProtectedRoutesAdmin';
 import AboutScreen from './Pages/AboutScreen';
 
 function App() {
-
-
   // Estados para manejar login y datos de usuario
   const [login, setLogin] = useState(true);
   const [user, setUser] = useState("USER_ROLE");
 
-  // Funcion para cerrar sesion 
+  // Función para cerrar sesión 
   const cerrarSesion = () => {
     setLogin(false);
     setUser(null); // Limpia el usuario al cerrar sesión
   }
 
-=======
-import React, { useState } from "react";
-
-import Home from "./pages/Home";
->>>>>>> PanelUsuario
-
-const App = () => {
-<<<<<<< HEAD
   return (
-<<<<<<< HEAD
     <BrowserRouter>
       <>
         {/* NavBar siempre presente */}
-        <NavBar cerrarSesion={cerrarSesion} user={user} login={login}/>
+        <NavBar cerrarSesion={cerrarSesion} user={user} login={login} />
 
         <Routes>
           {/* Ruta de inicio */}
           <Route path="/" element={<HomeScreen />} />
 
-
           {/* Ruta pública "Sobre Nosotros" */}
-          <Route path="/about" element={<AboutScreen/>} />
+          <Route path="/about" element={<AboutScreen />} />
 
-
-            {/* Rutas protegidas que reciben login, datos de usuario y función cerrar sesión */}
-
-
+          {/* Rutas protegidas */}
           <Route path="/perfil" element={
-          <ProtectedRoutes login={login}>
-            <PerfilScreen/>
-          </ProtectedRoutes>
-        }/>
+            <ProtectedRoutes login={login}>
+              <PerfilScreen />
+            </ProtectedRoutes>
+          } />
 
-        <Route path="/admin" element={
-          <ProtectedRoutesAdmin user={user}>
-            <PageAdmin />
-          </ProtectedRoutesAdmin>
-        }/>
+          <Route path="/admin" element={
+            <ProtectedRoutesAdmin user={user}>
+              <PageAdmin />
+            </ProtectedRoutesAdmin>
+          } />
 
-          {/* Rutas protegidas que reciben login, datos de usuario y función cerrar sesión */}
+          {/* Rutas protegidas adicionales */}
           <Route path="/*" element={
             <ProtectedRoutes login={login}>
-                <RoutesApp cerrarSesion={cerrarSesion} user={user}/>
+              <RoutesApp cerrarSesion={cerrarSesion} user={user} />
             </ProtectedRoutes>
-          }/>
-
-
+          } />
         </Routes>
 
-        <Footer/>
+        <Footer />
       </>
     </BrowserRouter>
-  )
-}
-=======
-    <Home />
   );
-=======
-  return <Home />;
->>>>>>> PanelUsuario
-};
->>>>>>> PanelUsuario
+}
 
 export default App;
