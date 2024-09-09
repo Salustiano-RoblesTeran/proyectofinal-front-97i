@@ -12,7 +12,7 @@ const TablaPacientes = ({ onAceptar, onRechazar }) => {
     useEffect(() => {
         const fetchAppointments = async () => {
             try {
-                const response = await fetch('/getAppointments');
+                const response = await fetch('/api/appointments/getAllAppointments');
                 const data = await response.json();
                 setPacientesCargados(data.appointments); // Ahora usamos setPacientesCargados
             } catch (error) {
