@@ -41,6 +41,7 @@ import Home from "./pages/Home";
 >>>>>>> PanelUsuario
 
 const App = () => {
+<<<<<<< HEAD
   return (
 <<<<<<< HEAD
     <BrowserRouter>
@@ -90,6 +91,9 @@ const App = () => {
 =======
     <Home />
   );
+=======
+  return <Home />;
+>>>>>>> PanelUsuario
 };
 >>>>>>> PanelUsuario
 
