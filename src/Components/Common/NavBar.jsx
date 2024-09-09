@@ -4,9 +4,15 @@ import Registrarse from '../Home/Registrarse'; // Importa correctamente el compo
 import { Link, NavLink } from "react-router-dom";
 import RoutesApp from '../../routes/RoutesApp';
 
-const NavBar = ({ cerrarSesion, user, login }) => {
+const NavBar = ({ cerrarSesion, login }) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+
+  const [user, setUser] = useState(null);
+  //Función para guardar datos del usuario autenticado
+  const guardarUsuario = (datos) => {
+    setUser(datos);
+  };
 
   const handleLogin = () => {
     setShowLoginModal(true);
@@ -87,7 +93,7 @@ const NavBar = ({ cerrarSesion, user, login }) => {
         </div>
       </nav>
 
-      <IniciarSesion show={showLoginModal} handleClose={handleCloseLoginModal} />
+      <IniciarSesion show={showLoginModal} handleClose={handleCloseLoginModal}  guardarUsuario ={guardarUsuario}/>
       <Registrarse show={showRegisterModal} handleClose={handleCloseRegisterModal} />
     </>
   );

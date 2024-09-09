@@ -1,37 +1,45 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Aseguramos que el hook esté al principio
+import { authLogin } from '../../helpers/ApiLogin';
 
+const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
+  const navigate = useNavigate(); // El hook siempre se ejecuta
 
-const IniciarSesion = ({ show, handleClose, iniciarSesion, guardarUsuario }) => {
-  // const navigate = useNavigate(); // defino función para redireccionar
-  
+  // Definir estados
+  const [inputCorreo, setInputCorreo] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const [resultado, setResultado] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // Condición para ocultar el componente si no se debe mostrar
   if (!show) return null;
 
-  // Estado para todos los campos
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
-  })
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  const { email, password } = formValues;
-
-  const handleChange = (event) => {
-
-      setFormValues({
-        // ... es el spreads operator
-          ...formValues, [event.target.name]: event.target.value
-      });
-
+    // Obtener datos ingresados
+    const datos = {
+      correo: inputCorreo,
+      password: inputPassword,
     };
 
+    // Hacer petición a la API
+    const resp = await authLogin(datos);
+    console.log(resp);
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-
-      console.log(formValues);
-      // navigate("/");
-
-      //! AQUI HACEMOS LA PETICION AL BACK
+    if (resp?.success) {
+      // Guardar token
+      localStorage.setItem("token", JSON.stringify(resp.token));
+      guardarUsuario(resp.usuario);
+      navigate("/"); // Redirige al home o cualquier otra ruta tras login
+    } else {
+      // Si las credenciales son incorrectas, muestra el mensaje de error
+      setResultado({ msg: resp.msg || "Credenciales incorrectas" });
     }
+
+    setLoading(false);
+  };
 
   return (
     <div className="modal fade show d-block" id="staticBackdropLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -42,16 +50,16 @@ const IniciarSesion = ({ show, handleClose, iniciarSesion, guardarUsuario }) => 
             <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <form id="formularioLogin" onSubmit={handleSubmit}>
+            <form id="formularioLogin" onSubmit={handleLogin}>
               <div className="mb-3">
                 <label htmlFor="login_username" className="form-label">Ingrese su mail</label>
                 <input
                   type="email"
                   className="form-control"
-                  name='email'
+                  name="email"
                   placeholder="Ingrese su mail"
-                  value={formValues.email}
-                  onChange={handleChange}
+                  value={inputCorreo}
+                  onChange={(e) => setInputCorreo(e.target.value)}
                   required
                 />
               </div>
@@ -62,13 +70,18 @@ const IniciarSesion = ({ show, handleClose, iniciarSesion, guardarUsuario }) => 
                   className="form-control"
                   name="password"
                   placeholder="Ingrese contraseña"
-                  value={formValues.password}
-                  onChange={handleChange}
+                  value={inputPassword}
+                  onChange={(e) => setInputPassword(e.target.value)}
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
+              <button type="submit" className="btn btn-primary" disabled={loading}>
+                {loading ? "Cargando..." : "Iniciar Sesión"}
+              </button>
             </form>
+            {resultado?.msg && (
+              <div className="alert alert-danger mt-3">{resultado.msg}</div>
+            )}
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={handleClose}>Cerrar</button>

@@ -1,6 +1,6 @@
-const url = "http://localhost:3000/api/login";  // Añadir "http://"
+const url = "http://localhost:3000/api/register";  // Añadir "http://"
 
-export const authLogin = async (datos) => {
+export const authRegistro = async (datos) => {
     try {
         const resp = await fetch(url, {
             method: "POST",
