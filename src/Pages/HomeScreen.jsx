@@ -6,7 +6,6 @@ import Pasos from "../Components/Home/Pasos"
 const HomeScreen = () => {
   return (
     <>
-        
     <div className="App">
       <h1 className="text-center my-4">Nuestros Médicos</h1>
       <CardSlider/>
