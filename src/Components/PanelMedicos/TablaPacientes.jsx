@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Paciente from "../PanelMedicos/Pacientes";
 
-const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
+const TablaPacientes = ({ onAceptar, onRechazar }) => {
     const [pacientesCargados, setPacientesCargados] = useState([]); // Cambiamos el nombre aquí
     const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
     const [paginaActual, setPaginaActual] = useState(1);
