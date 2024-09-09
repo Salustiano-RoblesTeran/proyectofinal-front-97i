@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 
 const ModalTurno = ({ medico, cerrarModal }) => {
-  const [dni, setDni] = useState('');
-  const [consulta, setConsulta] = useState('');
-  const [turno, setTurno] = useState('');
+  const [dni, setDni] = useState("");
+  const [consulta, setConsulta] = useState("");
+  const [turno, setTurno] = useState("");
 
   const guardarTurno = (event) => {
     event.preventDefault();
@@ -14,11 +14,11 @@ const ModalTurno = ({ medico, cerrarModal }) => {
       consulta,
       turno,
       medico: `${medico.nombre} ${medico.apellido}`,
-      especialidad: medico.especialidad
+      especialidad: medico.especialidad,
     };
 
-    console.log('Turno guardado:', nuevoTurno);
-    alert('Turno guardado exitosamente');
+    console.log("Turno guardado:", nuevoTurno);
+    alert("Turno guardado exitosamente");
     cerrarModal(); // Cerrar el modal tras guardar
   };
 
@@ -28,10 +28,15 @@ const ModalTurno = ({ medico, cerrarModal }) => {
         <Modal.Title>Sacar turno</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Usted está sacando turno con el médico {medico?.nombre} {medico?.apellido} en la especialidad {medico?.especialidad}.</p>
+        <p>
+          Usted está sacando turno con el médico {medico?.nombre}{" "}
+          {medico?.apellido} en la especialidad {medico?.especialidad}.
+        </p>
         <form onSubmit={guardarTurno}>
           <div className="mb-3">
-            <label htmlFor="dni" className="form-label">DNI:</label>
+            <label htmlFor="dni" className="form-label">
+              DNI:
+            </label>
             <input
               type="number"
               className="form-control"
@@ -42,7 +47,9 @@ const ModalTurno = ({ medico, cerrarModal }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="consulta" className="form-label">Consulta:</label>
+            <label htmlFor="consulta" className="form-label">
+              Consulta:
+            </label>
             <input
               type="text"
               className="form-control"
@@ -53,7 +60,9 @@ const ModalTurno = ({ medico, cerrarModal }) => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="turno" className="form-label">Fecha del Turno:</label>
+            <label htmlFor="turno" className="form-label">
+              Fecha del Turno:
+            </label>
             <input
               type="date"
               className="form-control"
@@ -68,6 +77,7 @@ const ModalTurno = ({ medico, cerrarModal }) => {
           </Button>
         </form>
       </Modal.Body>
+
       <Modal.Footer>
         <Button variant="secondary" onClick={cerrarModal}>
           Cerrar
@@ -75,6 +85,22 @@ const ModalTurno = ({ medico, cerrarModal }) => {
       </Modal.Footer>
     </Modal>
   );
+};
+const getUserAppointments = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const appointments = await AppointmentModel.find({ user: userId })
+      .populate("tipoEstudio", "name")
+      .populate("medico", "first_name last_name");
+
+    if (!appointments) {
+      return res.status(404).json({ msg: "Appointments not found" });
+    }
+
+    res.status(200).json({ msg: "User's appointments", appointments });
+  } catch (error) {
+    res.status(500).json({ msg: "Error: Server", error });
+  }
 };
 
 export default ModalTurno;
