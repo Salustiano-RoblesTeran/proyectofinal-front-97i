@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TablaPacientes from '../components/PanelMedicos/TablaPacientes';
+import TablaPacientes from '../Components/PanelMedicos/TablaPacientes';
 
 const MedicoScreen = () => {
   const [pacientes, setPacientes] = useState([]);
