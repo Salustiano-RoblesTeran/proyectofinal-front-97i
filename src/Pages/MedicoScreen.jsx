@@ -6,9 +6,19 @@ const MedicoScreen = () => {
   const [pacientesAceptados, setPacientesAceptados] = useState([]);
   const [pacientesRechazados, setPacientesRechazados] = useState([]);
 
-  const agregarPaciente = (nuevoPaciente) => {
-    setPacientes([...pacientes, nuevoPaciente]);
-  };
+   // Obtener citas pendientes del backend
+   useEffect(() => {
+    const fetchPacientesPendientes = async () => {
+      try {
+        const response = await fetch('/api/appointments/getAllAppointments');
+        const data = await response.json();
+        setPacientes(data.appointments); 
+      } catch (error) {
+        console.error('Error fetching pacientes pendientes:', error);
+      }
+    };   
+    fetchPacientesPendientes();
+   }, []);
 
   const aceptarPaciente = (id) => {
     const pacienteAceptado = pacientes.find(paciente => paciente.id === id);
@@ -25,7 +35,7 @@ const MedicoScreen = () => {
 
     <div className="container">
     <h1 className="text-center my-4">Gestión de Pacientes</h1>
-    
+
     <h2>Pacientes Pendientes</h2>
     <TablaPacientes pacientes={pacientes} onAceptar={aceptarPaciente} onRechazar={rechazarPaciente} />
     <h2>Pacientes Aceptados</h2>
