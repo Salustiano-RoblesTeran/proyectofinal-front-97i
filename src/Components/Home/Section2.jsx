@@ -69,8 +69,8 @@ const Section2 = () => {
 
   return (
     <Container>
-      <Row>
-        <Col lg={6} id=''>
+      <Row id='section-turnos'>
+        <Col lg={6} id="solicitudTurno">
           <h2>Solicitar Turnos</h2>
           <hr className="w-25"/>
           <p>Rellena el formulario y solicita el turno con el medicos que necesites!</p>
