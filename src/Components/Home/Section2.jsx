@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Accordion } from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Section2 = () => {
+  
   const [medicos, setMedicos] = useState([]);
   const [formData, setFormData] = useState({
     nombre: '',
@@ -9,7 +12,8 @@ const Section2 = () => {
     telefono: '',
     tipoEstudio: '',
     medicoId: '',
-    message: ''
+    message: '',
+    fecha: new Date() // Nuevo campo para la fecha
   });
 
   // Obtener médicos del backend
@@ -31,6 +35,14 @@ const Section2 = () => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value
+    });
+  };
+
+  // Manejar cambios en la fecha
+  const handleDateChange = (date) => {
+    setFormData({
+      ...formData,
+      fecha: date
     });
   };
 
@@ -69,11 +81,11 @@ const Section2 = () => {
 
   return (
     <Container>
-      <Row>
-        <Col lg={6} id=''>
+      <Row id='section-turnos'>
+        <Col lg={6} id="solicitudTurno">
           <h2>Solicitar Turnos</h2>
           <hr className="w-25"/>
-          <p>Rellena el formulario y solicita el turno con el medicos que necesites!</p>
+          <p>Rellena el formulario y solicita el turno con el médico que necesites!</p>
           <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
               <Col md={6}>
@@ -147,6 +159,20 @@ const Section2 = () => {
 
             <Row className="mb-3">
               <Col>
+                <Form.Group>
+                  <DatePicker
+                    selected={formData.fecha}
+                    onChange={handleDateChange}
+                    dateFormat="yyyy/MM/dd"
+                    className="form-control"
+                    required
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Row className="mb-3">
+              <Col>
                 <Form.Group controlId="message">
                   <Form.Control
                     as="textarea"
@@ -171,33 +197,33 @@ const Section2 = () => {
           <p>Algunas de las preguntas que nuestros pacientes suelen tener...</p>
           <Accordion className='mt-4'>
             <Accordion.Item eventKey="0">
-              <Accordion.Header>¿Que es un estudio de alta complejidad?</Accordion.Header>
+              <Accordion.Header>¿Qué es un estudio de alta complejidad?</Accordion.Header>
               <Accordion.Body>
-              Son estudios de Resonancia Magnética, Tomografía Computada ó Mamografía Digital que profundizan en la exploración diagnóstica para una evaluación mas completa de los tejidos..
+                Son estudios de Resonancia Magnética, Tomografía Computada ó Mamografía Digital que profundizan en la exploración diagnóstica para una evaluación más completa de los tejidos.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="1">
-              <Accordion.Header>¿Es necesaria internacion?</Accordion.Header>
+              <Accordion.Header>¿Es necesaria internación?</Accordion.Header>
               <Accordion.Body>
-              No. Los estudios se realizan de manera ambulatoria, es decir que el paciente se va el mismo día que se realiza la práctica. Las prácticas pueden durar entre 45 minutos y 1 hora dependiendo el estudio.
+                No. Los estudios se realizan de manera ambulatoria, es decir que el paciente se va el mismo día que se realiza la práctica. Las prácticas pueden durar entre 45 minutos y 1 hora dependiendo el estudio.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">
-              <Accordion.Header>¿Que preparacion debo realizar?</Accordion.Header>
+              <Accordion.Header>¿Qué preparación debo realizar?</Accordion.Header>
               <Accordion.Body>
                 Depende el estudio a realizarse.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="3">
-              <Accordion.Header>¿Cuando recibire mis resultados?</Accordion.Header>
+              <Accordion.Header>¿Cuándo recibiré mis resultados?</Accordion.Header>
               <Accordion.Body>
-              Los resultados suelen estar disponibles entre 24 y 48 horas después del examen. Su médico recibirá los resultados y los discutirá con usted en su cita de seguimiento.
+                Los resultados suelen estar disponibles entre 24 y 48 horas después del examen. Su médico recibirá los resultados y los discutirá con usted en su cita de seguimiento.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="4">
-              <Accordion.Header>Mi medico realizo un pedido ¿todavia sirve?</Accordion.Header>
+              <Accordion.Header>Mi médico realizó un pedido ¿todavía sirve?</Accordion.Header>
               <Accordion.Body>
-              Las órdenes ó prescripciones médicas tienen una validez de 30 días. Debiendo contar con la siguiente información: Datos del paciente y obra social, práctica a realizar, diagnóstico, fecha, firma y sello del médico especialista que lo deriva.
+                Las órdenes ó prescripciones médicas tienen una validez de 30 días. Debiendo contar con la siguiente información: Datos del paciente y obra social, práctica a realizar, diagnóstico, fecha, firma y sello del médico especialista que lo deriva.
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

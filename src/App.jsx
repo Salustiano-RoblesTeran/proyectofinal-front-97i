@@ -12,7 +12,8 @@ import Footer from "./Components/Common/Footer"
 
 import RoutesApp from './routes/RoutesApp';
 import HomeScreen from './Pages/HomeScreen';
-import AdminScreen from './Pages/AdminScreen';
+// import AdminScreen from './Pages/AdminScreen';
+import PageAdmin from './Pages/PageAdmin';
 import PerfilScreen from './Pages/PerfilScreen';
 
 import ProtectedRoutes from './routes/ProtectedRoutes';
@@ -59,7 +60,7 @@ function App() {
 
         <Route path="/admin" element={
           <ProtectedRoutesAdmin user={user}>
-            <AdminScreen/>
+            <PageAdmin />
           </ProtectedRoutesAdmin>
         }/>
 
