@@ -1,11 +1,27 @@
-import React, { useState } from "react";
-import Paciente from "../../Components/PanelMedicos/Pacientes";
+import React, {useEffect, useState } from "react";
+import Paciente from "../PanelMedicos/Pacientes";
 
 const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
+    const [pacientes, setPacientes] = useState([]);
     const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
     const [paginaActual, setPaginaActual] = useState(1);
     const pacientesPorPagina = 5;
     const [historiaClinica, setHistoriaClinica] = useState('');
+    // Obtener turnos del backend
+    useEffect(() => {
+        const fetchAppointments = async () => {
+            try {
+                const response = await fetch('/api/appointments');
+                const data = await response.json();
+                setPacientes(data.appointments); 
+            } catch (error) {
+                console.error('Error fetching appointments:', error);
+            }
+        };
+
+        fetchAppointments();
+    }, []);
+
     const totalPaginas = Math.ceil(pacientes.length / pacientesPorPagina);
 
     const indiceUltimoPaciente = paginaActual * pacientesPorPagina;
@@ -35,7 +51,6 @@ const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
-                        <th>DNI</th>
                         <th>Teléfono</th>
                         <th>Consulta</th>
                         <th>Turno</th>
@@ -46,7 +61,7 @@ const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
                 <tbody className="text-center">
                     {pacientesActuales.map(paciente => (
                         <Paciente 
-                            key={paciente.id} 
+                            key={paciente._id} 
                             paciente={paciente} 
                             onAceptar={onAceptar} 
                             onRechazar={onRechazar} 
@@ -67,7 +82,6 @@ const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
                                 {/* Formulario para agregar la historia clínica */}
                              
                                     <div className="mb-3">
-                                    <p><strong>DNI:</strong> {pacienteSeleccionado.dni}</p>
                                     <p><strong>Teléfono:</strong> {pacienteSeleccionado.tel}</p>
                                     <p><strong>Consulta:</strong> {pacienteSeleccionado.consulta}</p>
                                     <p><strong> Historia Clínica</strong></p>
