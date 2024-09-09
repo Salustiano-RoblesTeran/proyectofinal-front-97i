@@ -1,19 +1,20 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Paciente from "../PanelMedicos/Pacientes";
 
 const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
-    const [pacientes, setPacientes] = useState([]);
+    const [pacientesCargados, setPacientesCargados] = useState([]); // Cambiamos el nombre aquí
     const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
     const [paginaActual, setPaginaActual] = useState(1);
     const pacientesPorPagina = 5;
     const [historiaClinica, setHistoriaClinica] = useState('');
+
     // Obtener turnos del backend
     useEffect(() => {
         const fetchAppointments = async () => {
             try {
                 const response = await fetch('/api/appointments');
                 const data = await response.json();
-                setPacientes(data.appointments); 
+                setPacientesCargados(data.appointments); // Ahora usamos setPacientesCargados
             } catch (error) {
                 console.error('Error fetching appointments:', error);
             }
@@ -22,12 +23,12 @@ const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
         fetchAppointments();
     }, []);
 
-    const totalPaginas = Math.ceil(pacientes.length / pacientesPorPagina);
+    const totalPaginas = Math.ceil(pacientesCargados.length / pacientesPorPagina);
 
     const indiceUltimoPaciente = paginaActual * pacientesPorPagina;
     const indicePrimerPaciente = indiceUltimoPaciente - pacientesPorPagina;
     
-    const pacientesActuales = pacientes.slice(indicePrimerPaciente, indiceUltimoPaciente);
+    const pacientesActuales = pacientesCargados.slice(indicePrimerPaciente, indiceUltimoPaciente);
 
     const handleVerHistoriaClinica = (paciente) => {
         setPacienteSeleccionado(paciente);
@@ -46,7 +47,7 @@ const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
     return (
         <div className="table-responsive">
             <table className="table table-striped table-bordered">
-                <thead className="thead-dark  text-center">
+                <thead className="thead-dark text-center">
                     <tr>
                         <th>Nombre</th>
                         <th>Apellido</th>
@@ -80,24 +81,19 @@ const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
                             </div>
                             <div className="modal-body">
                                 {/* Formulario para agregar la historia clínica */}
-                             
                                     <div className="mb-3">
                                     <p><strong>Teléfono:</strong> {pacienteSeleccionado.tel}</p>
                                     <p><strong>Consulta:</strong> {pacienteSeleccionado.consulta}</p>
                                     <p><strong> Historia Clínica</strong></p>
-                                      
                                         <textarea
                                             id="historiaClinica"
                                             className="form-control"
                                             rows="5"
                                             value={historiaClinica}
                                             onChange={(e) => setHistoriaClinica(e.target.value)}></textarea>
-                                          
                                     </div>
-                            
                             </div>
                             <div className="modal-footer">
-                              
                                 <button type="button" className="btn btn-success" onClick={handleGuardarHistoriaClinica}>Guardar</button>
                             </div>
                         </div>

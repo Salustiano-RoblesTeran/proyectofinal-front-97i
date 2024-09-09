@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const Section2 = () => {
+  
   const [medicos, setMedicos] = useState([]);
   const [formData, setFormData] = useState({
     nombre: '',
