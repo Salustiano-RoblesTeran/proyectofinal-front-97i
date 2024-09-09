@@ -1,0 +1,157 @@
+<<<<<<< HEAD
+=======
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+.container-fluid {
+  background-color: #f5f5f5;
+  padding: 20px;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-left: 100px;
+  margin-right: 100px;
+  border-radius: 10px;
+}
+.form-control {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.2rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.button {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.2rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.titulo-principal {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e7d8e;
+  margin-bottom: 20px;
+}
+.container {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.tabla-formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: #6c7e98;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(18, 41, 131, 0.753);
+  text-align: center;
+  border: 1px solid #491eaf;
+}
+.text-center {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 15px;
+  max-width: 400px;
+  padding: 0.2rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border: 1px solid #ccc;
+}
+.container-tabla {
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+.p-4 {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.2rem;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.mb-3 {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+.componentes-tabla {
+  width: 100%;
+  max-width: 400px;
+}
+.lista-m {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+/* datos colocados por galvez */
+.doctor-item {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  position: absolute;
+  left: 0px;
+  top: 691px;
+}
+>>>>>>> PanelUsuario

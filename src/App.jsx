@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -33,8 +34,15 @@ function App() {
     setUser(null); // Limpia el usuario al cerrar sesión
   }
 
+=======
+import React, { useState } from "react";
 
+import Home from "./pages/Home";
+>>>>>>> PanelUsuario
+
+const App = () => {
   return (
+<<<<<<< HEAD
     <BrowserRouter>
       <>
         {/* NavBar siempre presente */}
@@ -79,5 +87,10 @@ function App() {
     </BrowserRouter>
   )
 }
+=======
+    <Home />
+  );
+};
+>>>>>>> PanelUsuario
 
 export default App;
