@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Paciente from "../components/Pacientes";
+import Paciente from "../Components/Pacientes";
 
 const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
     const [pacienteSeleccionado, setPacienteSeleccionado] = useState(null);
