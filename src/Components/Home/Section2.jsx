@@ -68,12 +68,10 @@ const Section2 = () => {
         }
     
         const data = await response.json();
-        console.log('Respuesta del servidor:', data); // Verifica los datos aquí
     
         if (data && Array.isArray(data.getTipoEstudios)) {
           setEstudios(data.getTipoEstudios);
           data.getTipoEstudios.forEach((estudio) => {
-            console.log(`Estudio: ${estudio.nombre} - Descripción: ${estudio.descripcion}`);
           });
         } else {
           console.error('El formato de los datos no es correcto:', data);
@@ -101,39 +99,62 @@ const Section2 = () => {
       fecha: date
     });
   };
-
+  
   // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     console.log(formData);
     
-    const token = localStorage.getItem('token');
+    // Obtén el token y los datos del usuario del localStorage
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user")); // Obtiene los datos del usuario
+  
     if (!token) {
-      alert('Necesitas estar logueado para solicitar un turno');
+      alert("Debes estar logueado para solicitar un turno");
       return;
     }
+  
+    const formDataWithUser = {
+      user: user.idUser,  // Usa el ID del usuario almacenado
+      tipoEstudio: formData.tipoEstudio,
+      medico: formData.medicoId,
+      message: formData.message,
+      fecha: formData.fecha.toISOString()
+    };
+  
     try {
-      const response = await fetch('http://localhost:5000/api/createAppointments', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/api/createAppointments", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` // Enviar el token en los headers si es necesario
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formDataWithUser)
       });
   
       const data = await response.json();
   
       if (response.ok) {
-        alert('Turno solicitado con éxito');
+        alert("Turno solicitado con éxito");
+          setFormData({
+          nombre: "",
+          email: "",
+          telefono: "",
+          tipoEstudio: "",
+          medicoId: "",
+          fecha: null,
+          message: "",
+
+        });
       } else {
-        alert(data.msg || 'Error al solicitar turno');
+        alert(data.msg || "Error al solicitar turno");
       }
     } catch (error) {
-      console.error('Error al enviar el formulario:', error);
+      console.error("Error al enviar el formulario:", error);
     }
   };
-
+  
   return (
     <Container>
       <Row id='section-turnos'>

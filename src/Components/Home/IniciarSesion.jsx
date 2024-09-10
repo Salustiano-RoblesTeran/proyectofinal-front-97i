@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authLogin } from '../../helpers/ApiLogin';
+import { authLogin } from '../../helpers/ApiLogin'; // Asumo que tienes este helper para la autenticación
 
 const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
   const navigate = useNavigate();
@@ -13,13 +13,12 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
   const { email, password } = formValues;
   const [errorMessage, setErrorMessage] = useState("");
 
- 
   if (!show) return null;
 
   const handleChange = (event) => {
     setFormValues({
       ...formValues,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -27,26 +26,33 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
     event.preventDefault();
 
     // Enviar los datos al backend usando el helper `authLogin`
-    const result = await authLogin({
-      email, password
-    });
+    try {
+      const result = await authLogin({ email, password });
 
-    if (result.msg === "No se conectó con backend") {
-      setErrorMessage("No se pudo conectar con el servidor");
-    } else if (result.msg === "Usuario Logueado") {
-      // Manejar la respuesta exitosa
-      console.log("Inicio de sesión exitoso:", result);
-      localStorage.setItem("token", JSON.stringify(result.token)); 
-      guardarUsuario(result.usuario); 
-      if (result.role === "usuario") {
-        navigate("/user"); 
-      } else if (result.role === "admin") {
-        navigate("/admin"); 
+      if (!result || !result.token) {
+        // Si no obtenemos un token, algo salió mal
+        setErrorMessage(result?.msg || "Credenciales incorrectas");
+        return;
       }
-      handleClose();
-    } else {
 
-      setErrorMessage(result.msg || "Credenciales incorrectas");
+      // Guardar el token y la información del usuario en el localStorage
+      localStorage.setItem("token", result.token); // Guardar solo el token
+      localStorage.setItem("user", JSON.stringify(result.user)); // Guardar los datos del usuario
+
+      // Guardar los datos del usuario en el estado global si es necesario
+      guardarUsuario(result.user);
+
+      // Redirigir según el rol del usuario
+      if (result.user.role === "usuario") {
+        navigate("/user");
+      } else if (result.user.role === "admin") {
+        navigate("/admin");
+      }
+
+      handleClose(); // Cerrar el modal después del login exitoso
+    } catch (error) {
+      console.error("Error en el login:", error);
+      setErrorMessage("Error al iniciar sesión");
     }
   };
 

@@ -1,24 +1,30 @@
 const url = "http://localhost:5000/api/login";
 
 export const authLogin = async (datos) => {
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            body: JSON.stringify(datos),
-            headers: {
-                "Content-Type": "application/json; charset=UTF-8",
-            },
-        });
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datos), // Aquí quitamos la envoltura de { datos }
+    });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Error en la respuesta del servidor:', errorData);
-            throw new Error(errorData.msg || 'Error en la autenticación');
-        }
+    const data = await response.json();
 
-        return await response.json();
-    } catch (error) {
-        console.log("Error en la conexión con el servidor:", error);
-        return { msg: error.message || 'No se conectó con el backend' };
+    if (response.ok) {
+      // Almacena el token y los datos del usuario por separado
+      localStorage.setItem("token", data.token); // `data.token` desde la respuesta del backend
+      localStorage.setItem("user", JSON.stringify(data.user)); // `data.user` desde la respuesta del backend
+      alert("Usuario logueado con éxito");
+      return data;
+    } else {
+      alert(data.msg || "Error al iniciar sesión");
+      return null;
     }
+  } catch (error) {
+    console.error("Error en el login:", error);
+    alert("Error en el login");
+  }
 };
+
