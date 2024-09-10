@@ -106,25 +106,24 @@ const Section2 = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    // Verificamos si el usuario tiene el JWT
-    // const token = localStorage.getItem('token');
-    // if (!token) {
-    //   alert("Debes estar logueado para solicitar un turno");
-    //   return;
-    // }
-
+    
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Necesitas estar logueado para solicitar un turno');
+      return;
+    }
     try {
       const response = await fetch('http://localhost:5000/api/createAppointments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         alert('Turno solicitado con éxito');
       } else {

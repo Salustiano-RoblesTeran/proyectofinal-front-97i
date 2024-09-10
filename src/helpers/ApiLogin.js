@@ -2,7 +2,6 @@ const url = "http://localhost:5000/api/login";
 
 export const authLogin = async (datos) => {
     try {
-
         const response = await fetch(url, {
             method: "POST",
             body: JSON.stringify(datos),
@@ -14,7 +13,7 @@ export const authLogin = async (datos) => {
         if (!response.ok) {
             const errorData = await response.json();
             console.error('Error en la respuesta del servidor:', errorData);
-            throw new Error(errorData.message || 'Error en la autenticación');
+            throw new Error(errorData.msg || 'Error en la autenticación');
         }
 
         return await response.json();
