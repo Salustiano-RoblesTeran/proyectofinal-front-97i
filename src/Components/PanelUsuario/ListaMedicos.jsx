@@ -1,5 +1,4 @@
 import React from "react";
-/* ayuda rolling */
 
 const ListaMedicos = () => {
   return (
