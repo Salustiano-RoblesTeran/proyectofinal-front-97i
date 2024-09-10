@@ -37,18 +37,14 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
       // Manejar la respuesta exitosa
       console.log("Inicio de sesión exitoso:", result);
       localStorage.setItem("token", JSON.stringify(result.token)); 
-      guardarUsuario(result.usuario); // Si estás guardando usuario
-      console.log(result);
+      guardarUsuario(result.usuario); // Guardar el usuario en el estado superior (App)
       // Redirigir según el rol del usuario
       if (result.role === "usuario") {
         navigate("/user"); // Página protegida para usuarios normales
       } else if (result.role === "admin") {
         navigate("/admin"); // Página para administradores
-      } else {
-        navigate("/"); // Página principal o default
       }
-      navigate("/"); // Redirige al home o cualquier otra ruta tras login
-      handleClose();
+      handleClose(); // Cerrar modal
     } else {
       // Manejar el error de autenticación
       setErrorMessage(result.msg || "Credenciales incorrectas");
