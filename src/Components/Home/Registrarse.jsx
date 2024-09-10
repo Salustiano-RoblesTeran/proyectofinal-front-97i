@@ -34,10 +34,6 @@ const Registrarse = ({ show, handleClose }) => {
       return;
     }
   
-    // Mostrar datos en consola
-    console.log("Datos enviados al backend:", {
-      email, password, name, last_name, phone_number
-    });
   
     // Enviar los datos al backend usando el helper `authRegistro`
     const result = await authRegistro({
@@ -53,30 +49,6 @@ const Registrarse = ({ show, handleClose }) => {
     }
   };
   
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-    
-  //   // Validar que las contraseñas coincidan
-  //   if (password !== confirm_password) {
-  //     setErrorMessage("Las contraseñas no coinciden");
-  //     return;
-  //   }
-
-  //   // Enviar los datos al backend usando el helper `authRegistro`
-  //   const result = await authRegistro({
-  //     email, password, name, last_name, phone_number
-  //   });
-
-  //   if (result.msg === "No se conectó con backend") {
-  //     setErrorMessage("No se pudo conectar con el servidor");
-  //   } else {
-  //     // Manejar la respuesta exitosa
-  //     console.log("Registro exitoso:", result);
-  //     // Aquí puedes redirigir o cerrar el modal, por ejemplo:
-  //     handleClose();
-  //   }
-  // };
 
   return (
     <div className="modal fade show d-block" id="staticBackdropRegistar" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -96,7 +68,6 @@ const Registrarse = ({ show, handleClose }) => {
                     className="form-control"
                     name="name"
                     placeholder="Ingrese su nombre"
-                    pattern='^[a-zA-Z]+$'
                     value={name}
                     onChange={handleChange}
                     required
@@ -108,7 +79,6 @@ const Registrarse = ({ show, handleClose }) => {
                     type="text"
                     className="form-control"
                     name="last_name"
-                    pattern='^[a-zA-Z]+$'
                     placeholder="Ingrese su Apellido"
                     value={last_name}
                     onChange={handleChange}

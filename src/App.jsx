@@ -15,14 +15,13 @@ function App() {
   return (
     <BrowserRouter>
       <>
-        {/* NavBar siempre presente */}
         <NavBar />
 
         <Routes>
-          {/* Ruta de inicio */}
+
           <Route path="/" element={<HomeScreen />} />
 
-          {/* Ruta protegida para el usuario */}
+
           <Route path='/user' element={
             <ProtectedRoutesUser>
               <UserScreen />

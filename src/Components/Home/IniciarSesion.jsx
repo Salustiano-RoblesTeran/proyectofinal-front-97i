@@ -13,7 +13,7 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
   const { email, password } = formValues;
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Condición para ocultar el componente si no se debe mostrar
+ 
   if (!show) return null;
 
   const handleChange = (event) => {
@@ -37,16 +37,15 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
       // Manejar la respuesta exitosa
       console.log("Inicio de sesión exitoso:", result);
       localStorage.setItem("token", JSON.stringify(result.token)); 
-      guardarUsuario(result.usuario); // Guardar el usuario en el estado superior (App)
-      // Redirigir según el rol del usuario
+      guardarUsuario(result.usuario); 
       if (result.role === "usuario") {
-        navigate("/user"); // Página protegida para usuarios normales
+        navigate("/user"); 
       } else if (result.role === "admin") {
-        navigate("/admin"); // Página para administradores
+        navigate("/admin"); 
       }
-      handleClose(); // Cerrar modal
+      handleClose();
     } else {
-      // Manejar el error de autenticación
+
       setErrorMessage(result.msg || "Credenciales incorrectas");
     }
   };
@@ -90,7 +89,6 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
               </button>
             </form>
           </div>
-          {/* Mostrar mensaje de error si hay uno */}
           {errorMessage && <div className="alert alert-danger mt-3">{errorMessage}</div>}
 
           <div className="modal-footer">
