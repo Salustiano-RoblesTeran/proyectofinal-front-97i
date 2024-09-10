@@ -17,3 +17,4 @@ export const authRegistro = async (datos) => {
         return { msg: "No se conectó con backend" };
     }
 }
+
