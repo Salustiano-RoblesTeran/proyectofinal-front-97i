@@ -4,7 +4,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const Section2 = () => {
-  
+
+  const [estudios, setEstudios] = useState([]);
   const [medicos, setMedicos] = useState([]);
   const [formData, setFormData] = useState({
     nombre: '',
@@ -20,15 +21,70 @@ const Section2 = () => {
   useEffect(() => {
     const fetchMedicos = async () => {
       try {
-        const response = await fetch('/api/medicos');
+        const token = localStorage.getItem('token'); // Obtener token del almacenamiento local
+
+        const response = await fetch('http://localhost:5000/api/medicos', {
+          headers: {
+            Authorization: `Bearer ${token}` // Incluir el token en los headers
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+
         const data = await response.json();
-        setMedicos(data.medicos);
+        console.log('Respuesta del servidor:', data);
+
+        if (data && data.medicos) {
+          // Establecer los médicos en el estado
+          setMedicos(data.medicos);
+
+          // Imprimir los nombres de los médicos en la consola
+          data.medicos.forEach((medico) => {
+            console.log(`${medico.name} ${medico.last_name}`);
+          });
+        } else {
+          console.error('El formato de los datos no es correcto:', data);
+        }
       } catch (error) {
-        console.error('Error fetching medicos:', error);
+        console.error('Error al obtener los médicos:', error);
       }
     };
     fetchMedicos();
+
+    const fetchEstudios = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Obtener token del almacenamiento local
+        const response = await fetch('http://localhost:5000/api/tipo-estudios', {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}` // Incluir el token en los headers
+          }
+        });
+    
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+    
+        const data = await response.json();
+        console.log('Respuesta del servidor:', data); // Verifica los datos aquí
+    
+        if (data && Array.isArray(data.getTipoEstudios)) {
+          setEstudios(data.getTipoEstudios);
+          data.getTipoEstudios.forEach((estudio) => {
+            console.log(`Estudio: ${estudio.nombre} - Descripción: ${estudio.descripcion}`);
+          });
+        } else {
+          console.error('El formato de los datos no es correcto:', data);
+        }
+      } catch (error) {
+        console.error('Error al obtener los estudios:', error);
+      }
+    };
+    fetchEstudios();
   }, []);
+
 
   // Manejar cambios en el formulario
   const handleChange = (e) => {
@@ -49,20 +105,20 @@ const Section2 = () => {
   // Manejar el envío del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData);
     // Verificamos si el usuario tiene el JWT
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert("Debes estar logueado para solicitar un turno");
-      return;
-    }
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //   alert("Debes estar logueado para solicitar un turno");
+    //   return;
+    // }
 
     try {
-      const response = await fetch('/api/appointments/create', {
+      const response = await fetch('http://localhost:5000/api/createAppointments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          // Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       });
@@ -84,7 +140,7 @@ const Section2 = () => {
       <Row id='section-turnos'>
         <Col lg={6} id="solicitudTurno">
           <h2>Solicitar Turnos</h2>
-          <hr className="w-25"/>
+          <hr className="w-25" />
           <p>Rellena el formulario y solicita el turno con el médico que necesites!</p>
           <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
@@ -135,7 +191,11 @@ const Section2 = () => {
                     required
                   >
                     <option value="">Elegir estudio</option>
-                    {/* Opciones de estudios */}
+                    {estudios.map((estudio) => (
+                      <option key={estudio._id} value={estudio._id}>
+                        {estudio.name}
+                      </option>
+                    ))}
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -149,7 +209,7 @@ const Section2 = () => {
                     <option value="">Elegir Médico</option>
                     {medicos.map((medico) => (
                       <option key={medico._id} value={medico._id}>
-                        {medico.first_name} {medico.last_name}
+                        {medico.name} {medico.last_name}
                       </option>
                     ))}
                   </Form.Select>
@@ -193,7 +253,7 @@ const Section2 = () => {
 
         <Col lg={6} className="mt-4 mt-lg-0">
           <h2>Preguntas Frecuentes</h2>
-          <hr className="w-25"/>
+          <hr className="w-25" />
           <p>Algunas de las preguntas que nuestros pacientes suelen tener...</p>
           <Accordion className='mt-4'>
             <Accordion.Item eventKey="0">

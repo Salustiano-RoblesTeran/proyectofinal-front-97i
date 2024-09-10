@@ -1,4 +1,4 @@
-const url = "http://localhost:3000/api/register";  // Añadir "http://"
+const url = "http://localhost:5000/api/register";  // Añadir "http://"
 
 export const authRegistro = async (datos) => {
     try {
@@ -10,6 +10,7 @@ export const authRegistro = async (datos) => {
             },
         });
         const data = await resp.json();
+
         return data;
     } catch (error) {
         // los errores
