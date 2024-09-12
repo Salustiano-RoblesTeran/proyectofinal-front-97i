@@ -1,10 +1,11 @@
-import { Navigate } from "react-router-dom";
+// ProtectedRoutesUser.jsx
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoutesUser = ({ children, user }) => {
-    if (user !== "usuario") {
-        return children;
-      } else {
-        return <Navigate to="/" />;
-      }
-}
-export default ProtectedRoutesUser
+const ProtectedRoutesUser = ({ user, children }) => {
+  if (!user || user.role !== 'usuario') {
+    return <Navigate to="/" />;  // Redirigir si no es usuario
+  }
+  return children;
+};
+
+export default ProtectedRoutesUser;

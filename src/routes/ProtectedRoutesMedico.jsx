@@ -1,10 +1,12 @@
-import { Navigate } from "react-router-dom";
+// ProtectedRoutesMedico.jsx
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoutesMedico = ({ children, user }) => {
-    if (user === "medico") {
-        return children;
-      } else {
-        return <Navigate to="/" />;
-      }
-}
-export default ProtectedRoutesMedico
+const ProtectedRoutesMedico = ({ user, children }) => {
+  console.log('Usuario en ProtectedRoutesMedico:', user);
+  if (!user || user.role !== 'medico') {
+    return <Navigate to="/" />;  // Redirigir si no es médico
+  }
+  return children;
+};
+
+export default ProtectedRoutesMedico;

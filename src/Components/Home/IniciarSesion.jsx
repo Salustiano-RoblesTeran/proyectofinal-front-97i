@@ -1,17 +1,17 @@
+// IniciarSesion.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authLogin } from '../../helpers/ApiLogin'; // Asumo que tienes este helper para la autenticación
+import { authLogin } from "../../helpers/ApiLogin";
 
 const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
   const navigate = useNavigate();
 
-  // Definir estados
   const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const { email, password } = formValues;
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (!show) return null;
 
@@ -25,34 +25,35 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Enviar los datos al backend usando el helper `authLogin`
     try {
       const result = await authLogin({ email, password });
-
       if (!result || !result.token) {
-        // Si no obtenemos un token, algo salió mal
-        setErrorMessage(result?.msg || "Credenciales incorrectas");
+        setErrorMessage(result?.msg || 'Credenciales incorrectas');
         return;
       }
+      console.log(result);
+      
 
-      // Guardar el token y la información del usuario en el localStorage
-      localStorage.setItem("token", result.token); // Guardar solo el token
-      localStorage.setItem("user", JSON.stringify(result.user)); // Guardar los datos del usuario
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('user', JSON.stringify(result.user));
 
-      // Guardar los datos del usuario en el estado global si es necesario
-      guardarUsuario(result.user);
+      guardarUsuario(result.user);  // Guarda la info del usuario en estado global o contexto
 
-      // Redirigir según el rol del usuario
-      if (result.user.role === "usuario") {
-        navigate("/user");
-      } else if (result.user.role === "admin") {
-        navigate("/admin");
+      // Redirige según el rol del usuario
+      if (result.user.role === 'admin') {
+        navigate('/admin');
+      } else if (result.user.role === 'usuario') {
+        navigate('/user');
+      } else if (result.user.role === 'medico') {
+        navigate('/medico');
+      } else {
+        setErrorMessage('No tienes permiso para acceder a esta sección');
       }
 
-      handleClose(); // Cerrar el modal después del login exitoso
+      handleClose();  // Cerrar modal si el login es exitoso
     } catch (error) {
-      console.error("Error en el login:", error);
-      setErrorMessage("Error al iniciar sesión");
+      console.error('Error en el login:', error);
+      setErrorMessage('Error al iniciar sesión');
     }
   };
 
@@ -90,13 +91,10 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
-                Iniciar Sesión
-              </button>
+              <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
             </form>
           </div>
           {errorMessage && <div className="alert alert-danger mt-3">{errorMessage}</div>}
-
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={handleClose}>Cerrar</button>
           </div>
