@@ -1,49 +1,35 @@
-import React from 'react'
-import { Table, Button } from 'react-bootstrap';
+import React from 'react';
 
-const TablaUsuarios = ({users, onRoleChange}) => {
+const TablaUsuarios = ({ users, onRoleChange }) => {
   return (
-    <>
-    <Table striped bordered hover responsive>
+    <table className="table table-striped">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Name</th>
+          <th>Nombre</th>
           <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
+          <th>Rol</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
-        {users.map((user, index) => (
-          <tr key={user.id}>
-            <td>{index + 1}</td>
+        {users.map(user => (
+          <tr key={user._id}>
             <td>{user.name}</td>
             <td>{user.email}</td>
             <td>{user.role}</td>
             <td>
-              <Button
-                variant="primary"
-                onClick={() => onRoleChange(user.id, 'user')}
-                disabled={user.role === 'user'}
-                className="me-2"
+              <button
+                className="btn btn-primary"
+                onClick={() => onRoleChange(user._id, user.role === 'usuario' ? 'medico' : 'usuario')}
               >
-                Asignar Usuario
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => onRoleChange(user.id, 'medico')}
-                disabled={user.role === 'medico'}
-              >
-                Asignar Médico
-              </Button>
+                Cambiar a {user.role === 'usuario' ? 'medico' : 'usuario'}
+              </button>
             </td>
           </tr>
         ))}
       </tbody>
-    </Table>
-    </>
-  )
-}
+    </table>
+  );
+};
 
-export default TablaUsuarios
+export default TablaUsuarios;

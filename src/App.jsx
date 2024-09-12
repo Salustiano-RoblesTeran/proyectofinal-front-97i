@@ -10,6 +10,7 @@ import MedicoScreen from './Pages/MedicoScreen';
 import ProtectedRoutesUser from './routes/ProtectedRoutesUser';
 import ProtectedRoutesAdmin from '../src/routes/ProtectedRoutesAdmin';
 import ProtectedRoutesMedico from './routes/ProtectedRoutesMedico';
+import Footer from './Components/Common/Footer';
 
 function App() {
   // Estado global para el usuario
@@ -35,12 +36,10 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
-        {/* Ruta para iniciar sesión, pasando `guardarUsuario` como prop */}
         <Route
           path="/login"
           element={<IniciarSesion guardarUsuario={guardarUsuario} />}
         />
-
         <Route
           path="/admin"
           element={
@@ -66,7 +65,9 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </Router>
+   
   );
 }
 

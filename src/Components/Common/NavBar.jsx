@@ -7,15 +7,13 @@ const NavBar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false); 
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null); // Asumiendo que user es un objeto que incluye role
   const navigate = useNavigate(); 
 
-
   const guardarUsuario = (datos) => {
-    setUser(datos);
+    setUser(datos);  // Aquí 'datos' es el objeto que representa al usuario (con el campo 'role')
     setIsAuthenticated(true); 
   };
-
 
   const cerrarSesion = () => {
     setIsAuthenticated(false); 
@@ -46,12 +44,14 @@ const NavBar = () => {
 
               {isAuthenticated && (
                 <>
-                  {user === "admin" && (
-                    <li className="nav-item">
-                      <NavLink className="nav-link" to="/admin">Panel Admin</NavLink>
-                    </li>
+                  {user?.role === "admin" && (
+                    <>
+                      <li className="nav-item">
+                        <NavLink className="nav-link" to="/admin">Panel Admin</NavLink>
+                      </li>
+                    </>
                   )}
-                  {user === "usuario" && (
+                  {user?.role === "usuario" && (
                     <li className="nav-item">
                       <NavLink className="nav-link" to="/perfil">Perfil</NavLink>
                     </li>
