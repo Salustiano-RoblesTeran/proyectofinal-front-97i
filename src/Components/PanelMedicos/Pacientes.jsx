@@ -2,27 +2,20 @@ import React from 'react';
 
 const Paciente = ({ paciente, onAceptar, onRechazar, onVerHistoriaClinica }) => {
     return (
-        <tr >
-            <td>{paciente.nombre}</td>
-            <td>{paciente.apellido}</td>
-            <td>{paciente.email}</td>
-            <td>{paciente.tel}</td>
-            <td>{paciente.consulta}</td>
-            <td>{paciente.turno}</td>
-            {onAceptar && onRechazar && (
-                <td>
-                    <button onClick={() => onRechazar(paciente.id)} className="btn btn-danger btn-sm">Rechazar</button>
-                    <button onClick={() => onAceptar(paciente.id)} className="btn btn-success btn-sm">Aceptar</button>
-                </td>
-            )}
-            {!onAceptar && !onRechazar && (
-                <td>
-                    <button onClick={() => onVerHistoriaClinica(paciente)} className="btn btn-success btn-sm">
-                        Ver Historia Clínica
-                    </button>
-                </td>
-            )}
-        </tr>
+        <tr>
+        <td>{paciente.user.name}</td>
+        <td>{paciente.user.last_name}</td>
+        <td>{paciente.user.email}</td>
+        <td>{paciente.user.phone_number}</td>
+        <td>{paciente.tipoEstudio.name}</td>
+        <td>{new Date(paciente.fecha).toLocaleString()}</td>
+        {onAceptar && onRechazar && (
+          <td>
+            <button className="btn btn-success m-1" onClick={() => onAceptar(paciente._id)}>Aceptar</button>
+            <button className="btn btn-danger" onClick={() => onRechazar(paciente._id)}>Rechazar</button>
+          </td>
+        )}
+      </tr>
     );
 };
 

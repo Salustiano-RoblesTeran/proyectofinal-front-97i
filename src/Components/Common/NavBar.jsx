@@ -56,6 +56,11 @@ const NavBar = () => {
                       <NavLink className="nav-link" to="/perfil">Perfil</NavLink>
                     </li>
                   )}
+                  {user?.role === "medico" && (
+                      <li className="nav-item">
+                        <NavLink className="nav-link" to="/medico">Panel de Medico</NavLink>
+                      </li>
+                  )}
                 </>
               )}
               <li className="nav-item">

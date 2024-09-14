@@ -34,16 +34,11 @@ const Section2 = () => {
         }
 
         const data = await response.json();
-        console.log('Respuesta del servidor:', data);
 
         if (data && data.medicos) {
           // Establecer los médicos en el estado
           setMedicos(data.medicos);
 
-          // Imprimir los nombres de los médicos en la consola
-          data.medicos.forEach((medico) => {
-            console.log(`${medico.name} ${medico.last_name}`);
-          });
         } else {
           console.error('El formato de los datos no es correcto:', data);
         }
