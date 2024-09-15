@@ -17,7 +17,6 @@ const HomeScreen = () => {
       <h1 className="text-center my-4">Nuestros Médicos</h1>
       <hr className="h-25"/>
       <CardSlider/>
-      <Footer/>
     </div>
         
     </>

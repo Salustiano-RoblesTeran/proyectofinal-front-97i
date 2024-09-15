@@ -2,7 +2,7 @@ const url = "http://localhost:5000/api/login";
 
 export const authLogin = async (datos) => {
     try {
-        const response = await fetch("http://localhost:5000/api/login", {
+        const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
