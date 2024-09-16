@@ -2,23 +2,33 @@ import React, { useState, useEffect } from 'react';
 import TablaPacientes from '../Components/PanelMedicos/TablaPacientes';
 
 const MedicoScreen = () => {
-  const [pacientes, setPacientes] = useState([]);
+  const [pacientesPendientes, setPacientesPendientes] = useState([]);
   const [pacientesAceptados, setPacientesAceptados] = useState([]);
   const [pacientesRechazados, setPacientesRechazados] = useState([]);
 
-  // Obtener citas pendientes del backend
+  // Obtener citas del backend y clasificarlas según su estado
   useEffect(() => {
-    const fetchPacientesPendientes = async () => {
+    const fetchPacientes = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/getAllAppointments');
         const data = await response.json();
-        console.log(data)
-        setPacientes(data.appointments); 
+        console.log(data);
+
+        // Clasificar pacientes por su estado
+        const pendientes = data.appointments.filter(paciente => paciente.estado === 'pendiente');
+        const aceptados = data.appointments.filter(paciente => paciente.estado === 'aceptado');
+        const rechazados = data.appointments.filter(paciente => paciente.estado === 'rechazado');
+
+        setPacientesPendientes(pendientes);
+        setPacientesAceptados(aceptados);
+        setPacientesRechazados(rechazados);
+
       } catch (error) {
-        console.error('Error fetching pacientes pendientes:', error);
+        console.error('Error fetching pacientes:', error);
       }
     };
-    fetchPacientesPendientes();
+
+    fetchPacientes();
   }, []);
 
   // Función para aceptar el turno de un paciente
@@ -31,8 +41,10 @@ const MedicoScreen = () => {
       });
 
       const updatedAppointment = await response.json();
-      setPacientes(pacientes.filter(paciente => paciente._id !== id));
-      setPacientesAceptados([...pacientesAceptados, pacientes.find(paciente => paciente._id === id)]);
+
+      // Actualizar el estado de la UI moviendo el paciente de "pendientes" a "aceptados"
+      setPacientesPendientes(pacientesPendientes.filter(paciente => paciente._id !== id));
+      setPacientesAceptados([...pacientesAceptados, updatedAppointment.appointment]);
 
     } catch (error) {
       console.error('Error accepting appointment:', error);
@@ -49,8 +61,10 @@ const MedicoScreen = () => {
       });
 
       const updatedAppointment = await response.json();
-      setPacientes(pacientes.filter(paciente => paciente._id !== id));
-      setPacientesRechazados([...pacientesRechazados, pacientes.find(paciente => paciente._id === id)]);
+
+      // Actualizar el estado de la UI moviendo el paciente de "pendientes" a "rechazados"
+      setPacientesPendientes(pacientesPendientes.filter(paciente => paciente._id !== id));
+      setPacientesRechazados([...pacientesRechazados, updatedAppointment.appointment]);
 
     } catch (error) {
       console.error('Error rejecting appointment:', error);
@@ -61,9 +75,11 @@ const MedicoScreen = () => {
     <div className="container">
       <h1 className="text-center my-4">Gestión de Pacientes</h1>
       <h2>Pacientes Pendientes</h2>
-      <TablaPacientes pacientes={pacientes} onAceptar={aceptarPaciente} onRechazar={rechazarPaciente} />
+      <TablaPacientes pacientes={pacientesPendientes} onAceptar={aceptarPaciente} onRechazar={rechazarPaciente} />
+      
       <h2>Pacientes Aceptados</h2>
-      <TablaPacientes pacientes={pacientesAceptados}  />
+      <TablaPacientes pacientes={pacientesAceptados} />
+
       <h2>Pacientes Rechazados</h2>
       <TablaPacientes pacientes={pacientesRechazados} />
     </div>
