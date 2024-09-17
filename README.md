@@ -45,7 +45,7 @@ Sigue los siguientes pasos para instalar y ejecutar el proyecto en tu entorno lo
 2. Navega al directorio del proyecto:
 
    ```bash
-   cd turnero-medico
+   cd proyectofinal-front-97i
    ```
 
 3. Instala las dependencias necesarias:
