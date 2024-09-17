@@ -2,28 +2,32 @@ import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import medico1 from '../../assets/staffMedicos/1.jpg'
+import medico2 from '../../assets/staffMedicos/1.png'
+import medico3 from '../../assets/staffMedicos/2.png'
+import medico4 from '../../assets/staffMedicos/3.png'
 
 const CardSlider = () => {
   const doctors = [
     {
-      name: "Dr. Jorge Garcia Pinna",
-      description: "Cardiólogo con más de 10 años de experiencia.",
-      image: "https://www.centrogalvez.com.ar/wp-content/uploads/2017/01/G_garcia-pinna-343x255.png",
+      name: "Dr. Josefina Garcia Pinna",
+      description: "Cardióloga con más de 10 años de experiencia.",
+      image: medico1,
     },
     {
-      name: "Dra. Eduardo Galvez",
+      name: "Dra. Beatriz Galvez",
       description: "Diagnostico por imagenes / Tomografia multicorte / Resonancia magenetica de alto campo",
-      image: "https://centrogalvez.com.ar/wp-content/uploads/2017/01/Dr.-Eduardo-Galvez-343x255.png",
+      image: medico2,
     },
     {
       name: "Dr Claudia Morales",
       description: "Especialista en clinica pediatra",
-      image: "https://www.centrogalvez.com.ar/wp-content/uploads/2016/12/g-dramorales-1-343x255.png",
+      image: medico3,
     },
     {
-      name: "Dra. Emily White",
+      name: "Dra. jorge White",
       description: "Clinico Medico / Radiologia digital / Ecografia",
-      image: "https://www.centrogalvez.com.ar/wp-content/uploads/2017/11/g-drramirez-343x255.png",
+      image: medico4,
     },
   ];
 

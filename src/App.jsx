@@ -11,6 +11,8 @@ import ProtectedRoutesUser from './routes/ProtectedRoutesUser';
 import ProtectedRoutesAdmin from '../src/routes/ProtectedRoutesAdmin';
 import ProtectedRoutesMedico from './routes/ProtectedRoutesMedico';
 import Footer from './Components/Common/Footer';
+import AboutScreen from './Pages/AboutScreen';
+import ErrorScreen from './Pages/ErrorScreen';
 
 function App() {
   // Estado global para el usuario
@@ -64,6 +66,13 @@ function App() {
             </ProtectedRoutesMedico>
           }
         />
+                <Route
+          path="/about"
+          element={
+              <AboutScreen />
+          }
+        />
+        <Route path='/error' element={<ErrorScreen/>}/>
       </Routes>
       <Footer />
     </Router>
