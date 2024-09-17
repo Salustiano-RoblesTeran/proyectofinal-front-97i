@@ -79,7 +79,7 @@ const AboutScreen = () => {
         ))}
       </Slider>
 
-      <style jsx>{`
+      <style>{`
         .fixed-size-img {
           width: 100%;
           height: 500px; 
