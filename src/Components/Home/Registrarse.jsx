@@ -24,22 +24,20 @@ const Registrarse = ({ show, handleClose }) => {
     });
   };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     // Validar que las contraseñas coincidan
     if (password !== confirm_password) {
       setErrorMessage("Las contraseñas no coinciden");
       return;
     }
-  
-  
+
     // Enviar los datos al backend usando el helper `authRegistro`
     const result = await authRegistro({
       email, password, name, last_name, phone_number
     });
-  
+
     if (result.msg === "No se conectó con backend") {
       setErrorMessage("No se pudo conectar con el servidor");
     } else {
@@ -48,7 +46,6 @@ const Registrarse = ({ show, handleClose }) => {
       handleClose();
     }
   };
-  
 
   return (
     <div className="modal fade show d-block" id="staticBackdropRegistar" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -70,6 +67,7 @@ const Registrarse = ({ show, handleClose }) => {
                     placeholder="Ingrese su nombre"
                     value={name}
                     onChange={handleChange}
+                    maxLength={50} // Limita a 50 caracteres
                     required
                   />
                 </div>
@@ -82,6 +80,7 @@ const Registrarse = ({ show, handleClose }) => {
                     placeholder="Ingrese su Apellido"
                     value={last_name}
                     onChange={handleChange}
+                    maxLength={50} // Limita a 50 caracteres
                     required
                   />
                 </div>
@@ -95,6 +94,7 @@ const Registrarse = ({ show, handleClose }) => {
                   placeholder="Ingrese su teléfono"
                   value={phone_number}
                   onChange={handleChange}
+                  maxLength={15} // Limita a 15 caracteres (ajustar según formato)
                   required
                 />
               </div>
@@ -108,6 +108,7 @@ const Registrarse = ({ show, handleClose }) => {
                   placeholder="Ingrese su email"
                   value={email}
                   onChange={handleChange}
+                  maxLength={100} // Limita a 100 caracteres
                   required
                 />
                 <div id="emailHelp" className="form-text">
@@ -124,6 +125,7 @@ const Registrarse = ({ show, handleClose }) => {
                   placeholder="Ingrese su contraseña"
                   value={password}
                   onChange={handleChange}
+                  minLength={8} // Asegura que tenga al menos 8 caracteres
                   required
                 />
                 <div id="contraseñaHelp" className="form-text">

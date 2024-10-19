@@ -56,7 +56,7 @@ const CardSlider = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mb-5">
       <Slider {...settings}>
         {doctors.map((doctor, index) => (
           <div key={index} className="p-2">

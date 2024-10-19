@@ -22,7 +22,6 @@ export const authLogin = async (datos) => {
           return { msg: data.msg };
         }
       } catch (error) {
-        console.error("Error en el login:", error);
         return { msg: "Error en el servidor" };
       }
 };

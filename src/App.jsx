@@ -22,14 +22,12 @@ function App() {
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
-      console.log('Usuario cargado desde localStorage:', JSON.parse(savedUser));
       setUser(JSON.parse(savedUser)); // Actualiza el estado con el usuario guardado en localStorage
     }
   }, []);
 
   // Función que se pasará como prop a IniciarSesion para actualizar el usuario
   const guardarUsuario = (usuario) => {
-    console.log('Usuario guardado en estado global:', usuario);
     setUser(usuario);  // Actualiza el estado con el usuario que viene del login
   };
 

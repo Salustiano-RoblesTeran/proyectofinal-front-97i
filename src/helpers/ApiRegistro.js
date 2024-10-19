@@ -13,8 +13,6 @@ export const authRegistro = async (datos) => {
 
         return data;
     } catch (error) {
-        // los errores
-        console.log("Error en la conexión con el servidor:", error);
         return { msg: "No se conectó con backend" };
     }
 }
