@@ -1,4 +1,4 @@
-const url = "https://comision97i-backfinal.vercel.app";
+const url = "https://comision97i-backfinal.vercel.app/api/login";
 
 export const authLogin = async (datos) => {
     try {
@@ -22,7 +22,6 @@ export const authLogin = async (datos) => {
           return { msg: data.msg };
         }
       } catch (error) {
-        console.error("Error en el login:", error);
         return { msg: "Error en el servidor" };
       }
 };

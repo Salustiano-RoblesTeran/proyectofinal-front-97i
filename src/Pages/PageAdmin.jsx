@@ -14,22 +14,16 @@ const PageAdmin = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`http://comision97i-backfinal.vercel.app/api/getAllUsers?numeroPagina=${currentPage - 1}&limite=${usersPerPage}`);
+        const res = await fetch(`https://comision97i-backfinal.vercel.app/api/getAllUsers?numeroPagina=${currentPage - 1}&limite=${usersPerPage}`);
         
-        // Depurar respuesta
-        console.log('Estado de la respuesta:', res.status);
-        console.log('Tipo de contenido:', res.headers.get('Content-Type'));
-  
         if (!res.ok) {
           throw new Error('Error al obtener los usuarios');
         }
   
         const data = await res.json();
-        console.log('Datos recibidos:', data);
         setUsers(data.getUsers);
         setTotalUsers(data.count);
       } catch (error) {
-        console.error('Error al obtener los usuarios:', error);
         setErrorMessage('Error al obtener los usuarios');
       }
     };
@@ -49,16 +43,11 @@ const PageAdmin = () => {
         body: JSON.stringify({ role: newRole }),
       });
   
-      // Verificar el estado de la respuesta
-      console.log('Estado de la respuesta:', res.status);
-      console.log('Tipo de contenido:', res.headers.get('Content-Type'));
-  
       if (!res.ok) {
         throw new Error('Error al cambiar el rol del usuario');
       }
   
       const data = await res.json();
-      console.log('Datos recibidos:', data);
   
       // Actualizar el rol en la lista de usuarios
       const updatedUsers = users.map(user =>
@@ -66,7 +55,6 @@ const PageAdmin = () => {
       );
       setUsers(updatedUsers);
     } catch (error) {
-      console.error('Error al cambiar el rol del usuario:', error);
       setErrorMessage('Error al cambiar el rol del usuario');
     }
   };
