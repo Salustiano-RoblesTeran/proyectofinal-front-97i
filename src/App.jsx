@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/Common/NavBar';
@@ -8,27 +7,24 @@ import UserScreen from './Pages/UserScreen';
 import PageAdmin from './Pages/PageAdmin';
 import MedicoScreen from './Pages/MedicoScreen';
 import ProtectedRoutesUser from './routes/ProtectedRoutesUser';
-import ProtectedRoutesAdmin from '../src/routes/ProtectedRoutesAdmin';
+import ProtectedRoutesAdmin from './routes/ProtectedRoutesAdmin';
 import ProtectedRoutesMedico from './routes/ProtectedRoutesMedico';
 import Footer from './Components/Common/Footer';
 
 function App() {
-  // Estado global para el usuario
   const [user, setUser] = useState(null);
 
-  // Recuperar el usuario del localStorage si ya está logueado
+  // Recuperamos el usuario desde localStorage cuando la aplicación se monta
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
-      console.log('Usuario cargado desde localStorage:', JSON.parse(savedUser));
-      setUser(JSON.parse(savedUser)); // Actualiza el estado con el usuario guardado en localStorage
+      setUser(JSON.parse(savedUser)); // Cargamos el usuario en el estado
     }
   }, []);
 
-  // Función que se pasará como prop a IniciarSesion para actualizar el usuario
   const guardarUsuario = (usuario) => {
-    console.log('Usuario guardado en estado global:', usuario);
-    setUser(usuario);  // Actualiza el estado con el usuario que viene del login
+    setUser(usuario);
+    localStorage.setItem('user', JSON.stringify(usuario));
   };
 
   return (
@@ -36,38 +32,29 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
-        <Route
-          path="/login"
-          element={<IniciarSesion guardarUsuario={guardarUsuario} />}
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoutesAdmin user={user}>
-              <PageAdmin />
-            </ProtectedRoutesAdmin>
-          }
-        />
-        <Route
-          path="/user"
-          element={
-            <ProtectedRoutesUser user={user}>
-              <UserScreen />
-            </ProtectedRoutesUser>
-          }
-        />
-        <Route
-          path="/medico"
-          element={
-            <ProtectedRoutesMedico user={user}>
-              <MedicoScreen />
-            </ProtectedRoutesMedico>
-          }
-        />
+        <Route path="/login" element={<IniciarSesion guardarUsuario={guardarUsuario} />} />
+        
+        {/* Rutas protegidas por roles */}
+        <Route path="/admin" element={
+          <ProtectedRoutesAdmin user={user}>
+            <PageAdmin />
+          </ProtectedRoutesAdmin>
+        } />
+        
+        <Route path="/user" element={
+          <ProtectedRoutesUser user={user}>
+            <UserScreen />
+          </ProtectedRoutesUser>
+        } />
+        
+        <Route path="/medico" element={
+          <ProtectedRoutesMedico user={user}>
+            <MedicoScreen />
+          </ProtectedRoutesMedico>
+        } />
       </Routes>
       <Footer />
     </Router>
-   
   );
 }
 

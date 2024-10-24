@@ -6,23 +6,23 @@ import Registrarse from '../Home/Registrarse';
 const NavBar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); 
-  const [user, setUser] = useState(null); // Asumiendo que user es un objeto que incluye role
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
   const navigate = useNavigate(); 
 
   const guardarUsuario = (datos) => {
-    setUser(datos);  // Aquí 'datos' es el objeto que representa al usuario (con el campo 'role')
+    setUser(datos);  
     setIsAuthenticated(true); 
   };
 
   const cerrarSesion = () => {
-    setIsAuthenticated(false); 
-    setUser(null); 
-    localStorage.removeItem('token'); 
+    setIsAuthenticated(false);
+    setUser(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     navigate("/"); 
   };
 
-  // Manejar los modales
   const handleLogin = () => setShowLoginModal(true);
   const handleRegister = () => setShowRegisterModal(true);
   const handleCloseLoginModal = () => setShowLoginModal(false);
@@ -45,11 +45,9 @@ const NavBar = () => {
               {isAuthenticated && (
                 <>
                   {user?.role === "admin" && (
-                    <>
-                      <li className="nav-item">
-                        <NavLink className="nav-link" to="/admin">Panel Admin</NavLink>
-                      </li>
-                    </>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" to="/admin">Panel Admin</NavLink>
+                    </li>
                   )}
                   {user?.role === "usuario" && (
                     <li className="nav-item">
@@ -57,12 +55,13 @@ const NavBar = () => {
                     </li>
                   )}
                   {user?.role === "medico" && (
-                      <li className="nav-item">
-                        <NavLink className="nav-link" to="/medico">Panel de Medico</NavLink>
-                      </li>
+                    <li className="nav-item">
+                      <NavLink className="nav-link" to="/medico">Panel de Medico</NavLink>
+                    </li>
                   )}
                 </>
               )}
+
               <li className="nav-item">
                 <NavLink className="nav-link" to="/about">Sobre Nosotros</NavLink>
               </li>

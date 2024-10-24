@@ -32,8 +32,11 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
         return;
       }
       console.log(result);
-      
 
+
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      
       localStorage.setItem('token', result.token);
       localStorage.setItem('user', JSON.stringify(result.user));
 

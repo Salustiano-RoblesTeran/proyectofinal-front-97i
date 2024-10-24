@@ -14,7 +14,7 @@ const PageAdmin = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/getAllUsers?numeroPagina=${currentPage - 1}&limite=${usersPerPage}`);
+        const res = await fetch(`http://comision97i-backfinal.vercel.app/api/getAllUsers?numeroPagina=${currentPage - 1}&limite=${usersPerPage}`);
         
         // Depurar respuesta
         console.log('Estado de la respuesta:', res.status);
@@ -41,7 +41,7 @@ const PageAdmin = () => {
   // Manejar cambio de rol del usuario
   const handleRoleChange = async (id, newRole) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/userRoleChange/${id}`, {
+      const res = await fetch(`http://https://https://comision97i-backfinal.vercel.app/api/userRoleChange/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
