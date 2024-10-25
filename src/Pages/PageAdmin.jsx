@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import TablaUsuarios from '../Components/Admin/TablaUsuarios';
 import { Paginacion } from '../Components/Admin/Paginacion';
 import { Container } from 'react-bootstrap';
-import "../assets/Styles/PageAdmin.css"
 const PageAdmin = () => {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,29 +12,32 @@ const PageAdmin = () => {
   // Obtener todos los usuarios desde el backend con fetch
   useEffect(() => {
     const fetchUsers = async () => {
+      console.log(`Fetching users for page ${currentPage}`);  // Verifica si se ejecuta al cambiar de página
       try {
         const res = await fetch(`https://comision97i-backfinal.vercel.app/api/getAllUsers?numeroPagina=${currentPage - 1}&limite=${usersPerPage}`);
-        
         if (!res.ok) {
           throw new Error('Error al obtener los usuarios');
         }
-  
+        //https://comision97i-backfinal.vercel.app/
+    
         const data = await res.json();
-        setUsers(data.getUsers);
+        console.log("Fetched data:", data);
+        
+        setUsers([...data.getUsers]); // Forzar actualización con una copia del array
         setTotalUsers(data.count);
+        console.log("Updated users state:", data.getUsers);
       } catch (error) {
         setErrorMessage('Error al obtener los usuarios');
       }
     };
-  
+    
     fetchUsers();
   }, [currentPage, usersPerPage]);
-
   
   // Manejar cambio de rol del usuario
   const handleRoleChange = async (id, newRole) => {
     try {
-      const res = await fetch(`http://https://https://comision97i-backfinal.vercel.app/api/userRoleChange/${id}`, {
+      const res = await fetch(`https://comision97i-backfinal.vercel.app/api/userRoleChange/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -66,14 +68,17 @@ const PageAdmin = () => {
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
   // Paginación
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    console.log("Navigating to page:", pageNumber);
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className='contenedor-todo'>
     <Container>
       <h1 className="my-4 text-center">Administración de Usuarios</h1>
       {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-      <TablaUsuarios users={currentUsers} onRoleChange={handleRoleChange} />
+      <TablaUsuarios users={users} onRoleChange={handleRoleChange} />
       <Paginacion
         usersPerPage={usersPerPage}
         totalUsers={totalUsers}

@@ -24,7 +24,6 @@ const Section2 = () => {
         const token = localStorage.getItem('token'); // Obtener token del almacenamiento local
 
         const response = await fetch('https://comision97i-backfinal.vercel.app/api/medicos', {
-        const response = await fetch('http://comision97i-backfinal.vercel.app/api/medicos', {
           headers: {
             Authorization: `Bearer ${token}` // Incluir el token en los headers
           }

@@ -1,6 +1,7 @@
-import React from 'react';
-
+// En `TablaUsuarios.js`
 const TablaUsuarios = ({ users, onRoleChange }) => {
+  console.log("Received users in TablaUsuarios:", users);  // Confirmar datos recibidos
+
   return (
     <table className="table table-striped">
       <thead>
@@ -12,21 +13,27 @@ const TablaUsuarios = ({ users, onRoleChange }) => {
         </tr>
       </thead>
       <tbody>
-        {users.map(user => (
-          <tr key={user._id}>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.role}</td>
-            <td>
-              <button
-                className="btn btn-primary"
-                onClick={() => onRoleChange(user._id, user.role === 'usuario' ? 'medico' : 'usuario')}
-              >
-                Cambiar a {user.role === 'usuario' ? 'medico' : 'usuario'}
-              </button>
-            </td>
+        {users.length > 0 ? (
+          users.map(user => (
+            <tr key={user._id}>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.role}</td>
+              <td>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => onRoleChange(user._id, user.role === 'usuario' ? 'medico' : 'usuario')}
+                >
+                  Cambiar a {user.role === 'usuario' ? 'medico' : 'usuario'}
+                </button>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="4">No se encontraron usuarios.</td>
           </tr>
-        ))}
+        )}
       </tbody>
     </table>
   );
