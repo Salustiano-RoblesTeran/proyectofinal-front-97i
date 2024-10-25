@@ -1,4 +1,4 @@
-const url = "https://comision97i-backfinal.vercel.api/api/login"; 
+const url = "https://comision97i-backfinal.vercel.app/api/login"; 
 
 export const authLogin = async (datos) => {
     try {
