@@ -17,3 +17,9 @@
   .contenedor-section2{
     margin-top: 4rem;
   }
+
+  @media (max-width: 760px) {
+    #formgroup{
+      margin-bottom: .1rem;
+    }
+  }

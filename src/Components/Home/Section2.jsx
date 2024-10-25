@@ -160,7 +160,7 @@ const Section2 = () => {
           <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
               <Col md={6}>
-                <Form.Group controlId="nombre">
+                <Form.Group controlId="nombre" className='mb-2'>
                   <Form.Control
                     type="text"
                     placeholder="Nombre y apellido"
