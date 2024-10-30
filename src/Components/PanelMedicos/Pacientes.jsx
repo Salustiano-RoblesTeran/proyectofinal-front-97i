@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Paciente = ({ paciente, onAceptar, onRechazar, onVerHistoriaClinica }) => {
+const Paciente = ({ paciente, onAceptar, onRechazar }) => {
     return (
         <tr>
-            <td>{paciente?.name || 'N/A'}</td>
-            <td>{paciente?.last_name || 'N/A'}</td>
-            <td>{paciente?.email || 'N/A'}</td>
-            <td>{paciente?.phone_number || 'N/A'}</td>
+            <td>{paciente.user?.name || 'N/A'}</td>
+            <td>{paciente.user?.last_name || 'N/A'}</td>
+            <td>{paciente.user?.email || 'N/A'}</td>
+            <td>{paciente.user?.phone_number || 'N/A'}</td>
             <td>{paciente.tipoEstudio?.name || 'N/A'}</td>
             <td>{new Date(paciente.fecha).toLocaleString()}</td>
             {onAceptar && onRechazar && (
