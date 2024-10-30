@@ -24,6 +24,13 @@ function App() {
     }
   }, []);
 
+  // Guarda el usuario en localStorage cada vez que cambia
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    }
+  }, [user]);
+
   const guardarUsuario = (usuario) => {
     setUser(usuario);  // Actualiza el estado con el usuario que viene del login
   };
@@ -61,13 +68,11 @@ function App() {
             </ProtectedRoutesMedico>
           }
         />
-                <Route
+        <Route
           path="/about"
-          element={
-              <AboutScreen />
-          }
+          element={<AboutScreen />}
         />
-        <Route path='/error' element={<ErrorScreen/>}/>
+        <Route path='/error' element={<ErrorScreen />} />
       </Routes>
       <Footer />
     </Router>
