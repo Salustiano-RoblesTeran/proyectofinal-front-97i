@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/Common/NavBar';
@@ -22,6 +23,7 @@ function App() {
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
       setUser(JSON.parse(savedUser)); // Actualiza el estado con el usuario guardado en localStorage
+      console.log("Usuario cargado desde localStorage:", JSON.parse(savedUser));
     }
     setIsLoading(false); // Cambia isLoading a false cuando el usuario ha sido cargado
   }, []);
@@ -29,11 +31,13 @@ function App() {
   // Guarda el usuario en localStorage cada vez que cambia
   useEffect(() => {
     if (user) {
+      console.log("Estado user en App actualizado:", user); // Confirmar valor antes de guardarlo en localStorage
       localStorage.setItem('user', JSON.stringify(user));
     }
   }, [user]);
 
   const guardarUsuario = (usuario) => {
+    console.log("Usuario guardado:", usuario);  // Confirmar el valor recibido
     setUser(usuario);  // Actualiza el estado con el usuario que viene del login
   };
 

@@ -2,7 +2,6 @@ import React from "react";
 import Paciente from "../PanelMedicos/Pacientes";
 
 const TablaPacientes = ({ pacientes, onAceptar, onRechazar }) => {
-  console.log(pacientes)
   return (
     <div className="table-responsive">
       <table className="table table-striped table-bordered">

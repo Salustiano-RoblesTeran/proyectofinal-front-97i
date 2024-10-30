@@ -31,8 +31,7 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
         setErrorMessage(result?.msg || 'Credenciales incorrectas');
         return;
       }
-      console.log(result);
-
+      console.log("Resultado de authLogin:", result);
 
       localStorage.removeItem('token');
       localStorage.removeItem('user');
