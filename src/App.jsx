@@ -15,6 +15,7 @@ import ErrorScreen from './Pages/ErrorScreen';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Recuperamos el usuario desde localStorage cuando la aplicación se monta
   useEffect(() => {
@@ -22,6 +23,7 @@ function App() {
     if (savedUser) {
       setUser(JSON.parse(savedUser)); // Actualiza el estado con el usuario guardado en localStorage
     }
+    setIsLoading(false); // Cambia isLoading a false cuando el usuario ha sido cargado
   }, []);
 
   // Guarda el usuario en localStorage cada vez que cambia
@@ -34,6 +36,9 @@ function App() {
   const guardarUsuario = (usuario) => {
     setUser(usuario);  // Actualiza el estado con el usuario que viene del login
   };
+
+  // Muestra un indicador de carga o null mientras el usuario se carga desde localStorage
+  if (isLoading) return <div>Cargando...</div>;
 
   return (
     <Router>
