@@ -1,16 +1,12 @@
-// IniciarSesion.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { authLogin } from "../../helpers/ApiLogin";
+import { useAuth } from '../../routes/AuthContext';
+import { authLogin } from '../../routes/AuthContext';
 
-const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
+const IniciarSesion = ({ show, handleClose }) => {
   const navigate = useNavigate();
-
-  const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
-  });
-  const { email, password } = formValues;
+  const { guardarUsuario } = useAuth();
+  const [formValues, setFormValues] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
 
   if (!show) return null;
@@ -24,43 +20,39 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage(''); // Resetea el mensaje de error en cada intento
 
     try {
-      const result = await authLogin({ email, password });
+      const result = await authLogin(formValues);
       if (!result || !result.token) {
         setErrorMessage(result?.msg || 'Credenciales incorrectas');
         return;
       }
-      console.log("Resultado de authLogin:", result);
 
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      
-      localStorage.setItem('token', result.token);
-      localStorage.setItem('user', JSON.stringify(result.user));
-
-      guardarUsuario(result.user);  // Guarda la info del usuario en estado global o contexto
+      guardarUsuario(result.user);
 
       // Redirige según el rol del usuario
-      if (result.user.role === 'admin') {
-        navigate('/admin');
-      } else if (result.user.role === 'usuario') {
-        navigate('/user');
-      } else if (result.user.role === 'medico') {
-        navigate('/medico');
-      } else {
-        setErrorMessage('No tienes permiso para acceder a esta sección');
-      }
+      if (result.user.role === 'admin') navigate('/admin');
+      else if (result.user.role === 'usuario') navigate('/user');
+      else if (result.user.role === 'medico') navigate('/medico');
+      else setErrorMessage('No tienes permiso para acceder a esta sección');
 
-      handleClose();  // Cerrar modal si el login es exitoso
+      handleClose();
     } catch (error) {
-      console.error('Error en el login:', error);
       setErrorMessage('Error al iniciar sesión');
     }
   };
 
   return (
-    <div className="modal fade show d-block" id="staticBackdropLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div
+      className="modal fade show d-block"
+      id="staticBackdropLogin"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabIndex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
@@ -76,7 +68,7 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
                   className="form-control"
                   name="email"
                   placeholder="Ingrese su mail"
-                  value={email}
+                  value={formValues.email}
                   onChange={handleChange}
                   required
                 />
@@ -88,7 +80,7 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
                   className="form-control"
                   name="password"
                   placeholder="Ingrese contraseña"
-                  value={password}
+                  value={formValues.password}
                   onChange={handleChange}
                   required
                 />
