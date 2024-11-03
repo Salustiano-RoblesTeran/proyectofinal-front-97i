@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../routes/AuthContext';
-import { authLogin } from '../../routes/AuthContext';
 
 const IniciarSesion = ({ show, handleClose }) => {
   const navigate = useNavigate();
