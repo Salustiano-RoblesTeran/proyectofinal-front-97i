@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 const IniciarSesion = ({ show, handleClose }) => {
   const navigate = useNavigate();
-  const { guardarUsuario } = useAuth();
   const [formValues, setFormValues] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
 
