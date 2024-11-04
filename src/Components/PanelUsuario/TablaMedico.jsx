@@ -9,18 +9,17 @@ const TablaMedico = ({ medicos, abrirModal }) => {
           <th>Apellido</th>
           <th>Especialidad</th>
           <th>Edad</th>
-          <th>Localidad</th>
           <th>Acción</th>
+          
         </tr>
       </thead>
       <tbody>
         {medicos.map((medico, index) => (
           <tr key={index} className="text-center">
-            <td>{medico.nombre}</td>
-            <td>{medico.apellido}</td>
-            <td>{medico.especialidad}</td>
-            <td>{medico.edad} Años</td>
-            <td>{medico.localidad}</td>
+            <td>{medico.name}</td>
+            <td>{medico.last_name}</td>
+            <td>{medico.tipoEstudio ? medico.tipoEstudio : '-'}</td>
+            <td>{medico.edad ? medico.edad : '-'} Años</td>
             <td>
               <button
                 className="btn btn-success"

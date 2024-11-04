@@ -6,21 +6,36 @@ const ModalTurno = ({ medico, cerrarModal }) => {
   const [consulta, setConsulta] = useState("");
   const [turno, setTurno] = useState("");
 
-  const guardarTurno = (event) => {
-    event.preventDefault();
-
-    const nuevoTurno = {
-      dni,
-      consulta,
-      turno,
-      medico: `${medico.nombre} ${medico.apellido}`,
-      especialidad: medico.especialidad,
+  const guardarTurno = async () => {
+    const formData = {
+      user: selectedUser,                // Asegúrate de que `selectedUser` tiene el valor correcto
+      tipoEstudio: selectedTipoEstudio,  // Asegúrate de que `selectedTipoEstudio` tiene el valor correcto
+      medico: selectedMedico,            // Asegúrate de que `selectedMedico` tiene el valor correcto
+      message: message,                  // Asegúrate de que `message` tiene el valor correcto
+      fecha: fecha.toISOString(),        // Convierte `fecha` a formato ISO
     };
-
-    console.log("Turno guardado:", nuevoTurno);
-    alert("Turno guardado exitosamente");
-    cerrarModal(); // Cerrar el modal tras guardar
+    console.log("Datos del formulario:", formData); // Verifica que los datos están completos y correctos
+  
+    try {
+      const response = await fetch("http://localhost:3000/api/createAppointments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error en la creación de la cita");
+      }
+  
+      const result = await response.json();
+      console.log("Cita creada exitosamente:", result);
+    } catch (error) {
+      console.error("Error al guardar el turno:", error);
+    }
   };
+  
 
   return (
     <Modal show={!!medico} onHide={cerrarModal}>
@@ -29,8 +44,7 @@ const ModalTurno = ({ medico, cerrarModal }) => {
       </Modal.Header>
       <Modal.Body>
         <p>
-          Usted está sacando turno con el médico {medico?.nombre}{" "}
-          {medico?.apellido} en la especialidad {medico?.especialidad}.
+          Usted está sacando turno con el médico {medico?.nombre} {medico?.apellido} en la especialidad {medico?.especialidad}.
         </p>
         <form onSubmit={guardarTurno}>
           <div className="mb-3">

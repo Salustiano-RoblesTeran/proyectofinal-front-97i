@@ -1,34 +1,58 @@
-import React from 'react';
-import CardSlider from '../Components/Home/CardSlider';
+import React, { useState, useEffect } from 'react';
+import TablaMedico from '../Components/PanelUsuario/TablaMedico'; 
+import ModalTurno from '../Components/PanelUsuario/ModalTurno'
 
 const UserScreen = () => {
+  const [medicos, setMedicos] = useState([]);
+  const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
+
+  // Función para obtener los médicos de la base de datos
+  useEffect(() => {
+    const fetchMedicos = async () => {
+      try {
+        const token = localStorage.getItem('token'); // Obtener token del almacenamiento local
+
+        const response = await fetch('http://localhost:3000/api/medicos', {
+          headers: {
+            Authorization: `Bearer ${token}` // Incluir el token en los headers
+          }
+        });
+
+        const data = await response.json();
+        console.log(data)
+
+          // Establecer los médicos en el estado
+          setMedicos(data.medicos);
+
+      } catch (error) {
+        console.error('Error al obtener los médicos:', error);
+      }
+    };
+
+    fetchMedicos();
+  }, []);
+
+  // Abre el modal con el médico seleccionado
+  const abrirModal = (medico) => {
+    setMedicoSeleccionado(medico);
+  };
+
+  // Cierra el modal
+  const cerrarModal = () => {
+    setMedicoSeleccionado(null);
+  };
+
+  console.log(medicos)
+
   return (
     <div className="container mt-5">
-      <div className="row justify-content-center">
       <h1 className="text-center my-4">Nuestros Médicos</h1>
-        <CardSlider/>
-        <div className="col-md-8">
-          <div className="card shadow-lg">
-            <div className="card-header bg-primary text-white text-center">
-              <h2>¡Bienvenido, Usuario!</h2>
-            </div>
-            <div className="card-body">
-              <p className="lead text-center">
-                Nos alegra verte de nuevo. Disfruta de todas las funciones y beneficios de nuestra plataforma.
-              </p>
-              <div className="text-center mt-4">
-                <button className="btn btn-outline-primary mx-2">Explorar Consultas</button>
-                <button className="btn btn-outline-secondary mx-2">Ver Perfil</button>
-              </div>
-            </div>
-            <div className="card-footer text-center">
-              <small className="text-muted">Pagina actualmente en desarrollo, disculpe las molestias.</small>
-            </div>
-          </div>
-        </div>
-      </div>
+      <TablaMedico medicos={medicos} abrirModal={abrirModal} />
+      {medicoSeleccionado && (
+        <ModalTurno medico={medicoSeleccionado} cerrarModal={cerrarModal} />
+      )}
     </div>
   );
-}
+};
 
 export default UserScreen;

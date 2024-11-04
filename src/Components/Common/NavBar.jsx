@@ -28,18 +28,37 @@ const NavBar = () => {
   const handleCloseLoginModal = () => setShowLoginModal(false);
   const handleCloseRegisterModal = () => setShowRegisterModal(false);
 
+  // Función para redirigir al inicio según el rol del usuario
+  const navigateToHome = () => {
+    if (!isAuthenticated || !user) {
+      navigate("/");  // Si no está autenticado, redirige al inicio público
+    } else if (user.role === "admin") {
+      navigate("/admin");
+    } else if (user.role === "usuario") {
+      navigate("/user");
+    } else if (user.role === "medico") {
+      navigate("/medico");
+    }
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">ProSalud</Link>
+          {/* Título que redirige según el rol del usuario */}
+          <span className="navbar-brand" onClick={navigateToHome} style={{ cursor: "pointer" }}>
+            ProSalud
+          </span>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
             <ul className="navbar-nav mb-2 mb-lg-0">
+              {/* Enlace de Inicio que redirige según el rol del usuario */}
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">Inicio</NavLink>
+                <span className="nav-link" onClick={navigateToHome} style={{ cursor: "pointer" }}>
+                  Inicio
+                </span>
               </li>
 
               {isAuthenticated && (

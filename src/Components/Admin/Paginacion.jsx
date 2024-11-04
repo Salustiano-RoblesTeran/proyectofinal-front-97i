@@ -7,7 +7,6 @@ export const Paginacion = ({ usersPerPage, totalUsers, paginate }) => {
   for (let i = 1; i <= Math.ceil(totalUsers / usersPerPage); i++) {
     pageNumbers.push(i);
   }
-  console.log("Total pages:", pageNumbers.length);
 
   return (
     <Pagination>

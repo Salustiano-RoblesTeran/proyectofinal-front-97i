@@ -13,9 +13,6 @@ const CardSlider = () => {
       name: "Dr. Josefina Garcia Pinna",
       description: "Cardióloga con más de 10 años de experiencia.",
       image: medico1,
-      name: "Dr. Jorge Garcia Pinna",
-      description: "Cardiólogo con más de 10 años de experiencia.",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9x6KKB7nbBvHVmgZtNNUB_xz5nYtmq41mZg&s",
     },
     {
       name: "Dra. Beatriz Galvez",

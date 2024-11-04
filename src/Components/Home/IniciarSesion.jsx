@@ -31,16 +31,12 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
         setErrorMessage(result?.msg || 'Credenciales incorrectas');
         return;
       }
-      console.log(result);
 
-
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      guardarUsuario(result.user);  // Guarda la info del usuario en estado global o contexto
       
       localStorage.setItem('token', result.token);
       localStorage.setItem('user', JSON.stringify(result.user));
 
-      guardarUsuario(result.user);  // Guarda la info del usuario en estado global o contexto
 
       // Redirige según el rol del usuario
       if (result.user.role === 'admin') {
@@ -53,11 +49,14 @@ const IniciarSesion = ({ show, handleClose, guardarUsuario }) => {
         setErrorMessage('No tienes permiso para acceder a esta sección');
       }
 
+      window.location.reload();
+
+  
       handleClose();  // Cerrar modal si el login es exitoso
     } catch (error) {
-      console.error('Error en el login:', error);
       setErrorMessage('Error al iniciar sesión');
     }
+    
   };
 
   return (

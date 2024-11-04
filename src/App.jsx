@@ -22,7 +22,7 @@ function App() {
     if (savedUser) {
       setUser(JSON.parse(savedUser)); // Actualiza el estado con el usuario guardado en localStorage
     }
-  }, []);
+  },[localStorage.getItem('user')]);
 
   const guardarUsuario = (usuario) => {
     setUser(usuario);  // Actualiza el estado con el usuario que viene del login
