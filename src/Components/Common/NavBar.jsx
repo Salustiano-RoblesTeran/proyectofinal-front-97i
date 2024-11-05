@@ -88,9 +88,14 @@ const NavBar = () => {
 
             <div className="d-flex">
               {isAuthenticated ? (
+                <>
+                <span className="navbar-text me-3">
+                  Bienvenido, {user.name}
+                </span>
                 <button className="btn btn-outline-danger" onClick={cerrarSesion}>
                   Cerrar sesión
                 </button>
+              </>
               ) : (
                 <>
                   <button className="btn btn-outline-primary me-2" onClick={handleLogin}>

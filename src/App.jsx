@@ -12,6 +12,7 @@ import ProtectedRoutesMedico from './routes/ProtectedRoutesMedico';
 import Footer from './Components/Common/Footer';
 import AboutScreen from './Pages/AboutScreen';
 import ErrorScreen from './Pages/ErrorScreen';
+import PerfilScreen from './Pages/PerfilScreen';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -61,12 +62,20 @@ function App() {
             </ProtectedRoutesMedico>
           }
         />
-                <Route
+          <Route
           path="/about"
           element={
               <AboutScreen />
           }
         />
+
+        <Route
+          path="/perfil"
+          element={
+              <PerfilScreen />
+          }
+        />
+
         <Route path='/error' element={<ErrorScreen/>}/>
       </Routes>
       <Footer />
