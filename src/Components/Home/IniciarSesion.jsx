@@ -26,7 +26,11 @@ const IniciarSesion = ({ show, handleClose }) => {
         return;
       }
 
-      guardarUsuario(result.user);
+      guardarUsuario(result.user);  // Guarda la info del usuario en estado global o contexto
+      
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('user', JSON.stringify(result.user));
+
 
       // Redirige según el rol del usuario
       if (result.user.role === 'admin') navigate('/admin');
@@ -34,10 +38,14 @@ const IniciarSesion = ({ show, handleClose }) => {
       else if (result.user.role === 'medico') navigate('/medico');
       else setErrorMessage('No tienes permiso para acceder a esta sección');
 
-      handleClose();
+      window.location.reload();
+
+  
+      handleClose();  // Cerrar modal si el login es exitoso
     } catch (error) {
       setErrorMessage('Error al iniciar sesión');
     }
+    
   };
 
   return (

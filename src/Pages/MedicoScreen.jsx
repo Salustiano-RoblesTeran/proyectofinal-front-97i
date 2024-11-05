@@ -10,7 +10,7 @@ const MedicoScreen = () => {
   useEffect(() => {
     const fetchPacientes = async () => {
       try {
-        const response = await fetch('https://comision97i-backfinal.vercel.app/api/getAllAppointments');
+        const response = await fetch('http://localhost:5173/api/getAllAppointments');
         const data = await response.json();
         console.log(data);
 

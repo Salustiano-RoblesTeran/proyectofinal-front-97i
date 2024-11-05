@@ -11,7 +11,7 @@ const CardSlider = () => {
   const doctors = [
     {
       name: "Dr. Josefina Garcia Pinna",
-      description: "Cardiólogo con más de 10 años de experiencia.",
+      description: "Cardióloga con más de 10 años de experiencia.",
       image: medico1,
     },
     {

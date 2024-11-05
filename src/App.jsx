@@ -13,6 +13,7 @@ import ProtectedRoutesMedico from './routes/ProtectedRoutesMedico';
 import Footer from './Components/Common/Footer';
 import AboutScreen from './Pages/AboutScreen';
 import ErrorScreen from './Pages/ErrorScreen';
+import PerfilScreen from './Pages/PerfilScreen';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -24,8 +25,7 @@ function App() {
       setUser(JSON.parse(savedUser));
       console.log("Usuario cargado desde localStorage:", JSON.parse(savedUser));
     }
-    setIsLoading(false);
-  }, []);
+  },[localStorage.getItem('user')]);
 
   useEffect(() => {
     if (user) {
@@ -46,28 +46,49 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<HomeScreen />} />
-        <Route path="/login" element={<IniciarSesion guardarUsuario={guardarUsuario} />} />
-        
-        <Route path="/admin" element={
-          <ProtectedRoutesAdmin user={user}>
-            <PageAdmin />
-          </ProtectedRoutesAdmin>
-        }/>
-        
-        <Route path="/user" element={
-          <ProtectedRoutesUser user={user}>
-            <UserScreen />
-          </ProtectedRoutesUser>
-        }/>
-        
-        <Route path="/medico" element={
-          <ProtectedRoutesMedico user={user}>
-            <MedicoScreen />
-          </ProtectedRoutesMedico>
-        }/>
-        
-        <Route path="/about" element={<AboutScreen />} />
-        <Route path='/error' element={<ErrorScreen />} />
+        <Route
+          path="/login"
+          element={<IniciarSesion guardarUsuario={guardarUsuario} />}
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoutesAdmin user={user}>
+              <PageAdmin />
+            </ProtectedRoutesAdmin>
+          }
+        />
+        <Route
+          path="/user"
+          element={
+            <ProtectedRoutesUser user={user}>
+              <UserScreen />
+            </ProtectedRoutesUser>
+          }
+        />
+        <Route
+          path="/medico"
+          element={
+            <ProtectedRoutesMedico user={user}>
+              <MedicoScreen />
+            </ProtectedRoutesMedico>
+          }
+        />
+          <Route
+          path="/about"
+          element={
+              <AboutScreen />
+          }
+        />
+
+        <Route
+          path="/perfil"
+          element={
+              <PerfilScreen />
+          }
+        />
+
+        <Route path='/error' element={<ErrorScreen/>}/>
       </Routes>
       <Footer />
     </Router>

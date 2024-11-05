@@ -1,11 +1,9 @@
-// ProtectedRoutesUser.jsx
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoutesUser = ({ user, children }) => {
-  console.log("Usuario en ProtectedRoutesUser:", user);
-
+  // Asegúrate de que el rol sea el correcto y el usuario esté autenticado
   if (!user || user.role !== 'usuario') {
-    return <Navigate to="/" />;
+    return <Navigate to="/" />; 
   }
   return children;
 };

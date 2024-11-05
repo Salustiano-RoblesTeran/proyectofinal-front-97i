@@ -61,7 +61,6 @@ const Section2 = () => {
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
-    
         const data = await response.json();
     
         if (data && Array.isArray(data.getTipoEstudios)) {
