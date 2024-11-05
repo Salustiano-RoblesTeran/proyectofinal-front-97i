@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Paciente = ({ paciente, onAceptar, onRechazar, onVerHistoriaClinica }) => {
+const Paciente = ({ paciente, onAceptar, onRechazar }) => {
     return (
         <tr>
         <td>{paciente.user.name}</td>

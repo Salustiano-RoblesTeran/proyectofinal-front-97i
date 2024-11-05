@@ -1,4 +1,4 @@
-const url = "http://localhost:3000/api/register"; 
+const url = "https://comision97i-backfinal.vercel.app/api/register"; 
 
 export const authRegistro = async (datos) => {
     try {

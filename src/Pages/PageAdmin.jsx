@@ -37,7 +37,7 @@ const PageAdmin = () => {
   // Manejar cambio de rol del usuario
   const handleRoleChange = async (id, newRole) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/userRoleChange/${id}`, {
+      const res = await fetch(`https://comision97i-backfinal.vercel.app/api/userRoleChange/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

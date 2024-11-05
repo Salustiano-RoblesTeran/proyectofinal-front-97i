@@ -19,7 +19,7 @@ const ModalTurno = ({ medico, cerrarModal, selectedUser }) => {
     console.log("Datos del formulario:", formData);
 
     try {
-      const response = await fetch("http://localhost:3000/api/createAppointments", {
+      const response = await fetch("https://comision97i-backfinal.vercel.app/api/createAppointments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
