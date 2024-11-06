@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const IniciarSesion = ({ show, handleClose }) => {
+const IniciarSesion = ({ show, handleClose,guardarUsuario }) => {
   const navigate = useNavigate();
-  const [formValues, setFormValues] = useState({ email: '', password: '' });
+
+  const [formValues, setFormValues] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = formValues;
   const [errorMessage, setErrorMessage] = useState('');
 
   if (!show) return null;
@@ -17,10 +22,9 @@ const IniciarSesion = ({ show, handleClose }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorMessage(''); // Resetea el mensaje de error en cada intento
 
     try {
-      const result = await authLogin(formValues);
+      const result = await authLogin({ email, password });
       if (!result || !result.token) {
         setErrorMessage(result?.msg || 'Credenciales incorrectas');
         return;
