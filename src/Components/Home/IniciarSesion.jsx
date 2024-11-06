@@ -44,8 +44,6 @@ const IniciarSesion = ({ show, handleClose,guardarUsuario }) => {
       else if (result.user.role === 'medico') navigate('/medico');
       else setErrorMessage('No tienes permiso para acceder a esta sección');
 
-      window.location.reload();
-
   
       handleClose();  // Cerrar modal si el login es exitoso
     } catch (error) {
