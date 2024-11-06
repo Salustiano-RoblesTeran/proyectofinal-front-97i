@@ -23,7 +23,6 @@ const PerfilScreen = ({ user }) => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Usuario actualizado:", data);
         alert("Datos actualizados con éxito");
         
         
@@ -37,11 +36,9 @@ const PerfilScreen = ({ user }) => {
         };
         localStorage.setItem("user", JSON.stringify(updatedUser));
       } else {
-        console.error("Error al actualizar usuario:", data.message || data);
         alert("Error al actualizar el usuario: " + (data.message || "Respuesta inválida"));
       }
     } catch (error) {
-      console.error("Error en la solicitud:", error);
       alert("Error en la solicitud: " + error.message);
     }
   };
@@ -59,7 +56,6 @@ const PerfilScreen = ({ user }) => {
       const userId = user.idUser;
       actualizarUsuario(userId, formData);
     } else {
-      console.error("No se encontró el ID del usuario");
       alert("No se pudo actualizar: ID del usuario no encontrado");
     }
   };

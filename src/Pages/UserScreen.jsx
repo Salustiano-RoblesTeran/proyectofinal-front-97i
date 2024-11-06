@@ -25,7 +25,7 @@ const UserScreen = () => {
           setMedicos(data.medicos);
 
       } catch (error) {
-        console.error('Error al obtener los médicos:', error);
+        alert('Error al obtener los médicos:', error);
       }
     };
 

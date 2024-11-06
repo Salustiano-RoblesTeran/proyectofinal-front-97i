@@ -42,7 +42,6 @@ const Registrarse = ({ show, handleClose }) => {
       setErrorMessage("No se pudo conectar con el servidor");
     } else {
       // Manejar la respuesta exitosa
-      console.log("Registro exitoso:", result);
       handleClose();
     }
   };

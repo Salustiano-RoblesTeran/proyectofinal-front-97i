@@ -145,7 +145,7 @@ const Section2 = () => {
         alert(data.msg || "Error al solicitar turno");
       }
     } catch (error) {
-      console.error("Error al enviar el formulario:", error);
+      alert("Error al enviar el formulario:", error);
     }
   };
   

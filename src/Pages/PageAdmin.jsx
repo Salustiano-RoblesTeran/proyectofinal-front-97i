@@ -13,15 +13,13 @@ const PageAdmin = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/getAllUsers?numeroPagina=${currentPage - 1}&limite=${usersPerPage}`);
+        const res = await fetch(`https://comision97i-backfinal.vercel.app/api/getAllUsers?numeroPagina=${currentPage - 1}&limite=${usersPerPage}`);
 
         if (!res.ok) {
           throw new Error('Error al obtener los usuarios');
         }
-        //https://comision97i-backfinal.vercel.app/
     
         const data = await res.json();
-        console.log("Fetched data:", data);
         
         setUsers([...data.getUsers]); // Forzar actualización con una copia del array
         setTotalUsers(data.count);
@@ -69,7 +67,6 @@ const PageAdmin = () => {
 
   // Paginación
   const paginate = (pageNumber) => {
-    console.log("Navigating to page:", pageNumber);
     setCurrentPage(pageNumber);
   };
 

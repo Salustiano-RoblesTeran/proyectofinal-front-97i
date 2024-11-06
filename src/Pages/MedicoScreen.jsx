@@ -12,7 +12,6 @@ const MedicoScreen = () => {
       try {
         const response = await fetch('http://localhost:5173/api/getAllAppointments');
         const data = await response.json();
-        console.log(data);
 
         // Clasificar pacientes por su estado
         const pendientes = data.appointments.filter(paciente => paciente.estado === 'pendiente');
@@ -24,7 +23,7 @@ const MedicoScreen = () => {
         setPacientesRechazados(rechazados);
 
       } catch (error) {
-        console.error('Error fetching pacientes:', error);
+        alert('Error fetching pacientes:', error);
       }
     };
 
@@ -47,7 +46,7 @@ const MedicoScreen = () => {
       setPacientesAceptados([...pacientesAceptados, updatedAppointment.appointment]);
 
     } catch (error) {
-      console.error('Error accepting appointment:', error);
+      alert('Error accepting appointment:', error);
     }
   };
 
@@ -67,7 +66,7 @@ const MedicoScreen = () => {
       setPacientesRechazados([...pacientesRechazados, updatedAppointment.appointment]);
 
     } catch (error) {
-      console.error('Error rejecting appointment:', error);
+      alert('Error rejecting appointment:', error);
     }
   };
 

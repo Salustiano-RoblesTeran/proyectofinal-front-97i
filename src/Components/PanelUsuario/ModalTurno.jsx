@@ -16,7 +16,6 @@ const ModalTurno = ({ medico, cerrarModal, selectedUser }) => {
       tipoEstudio,                         // Asegúrate de tener este campo en el formulario
     };
     
-    console.log("Datos del formulario:", formData);
 
     try {
       const response = await fetch("https://comision97i-backfinal.vercel.app/api/createAppointments", {
@@ -32,9 +31,9 @@ const ModalTurno = ({ medico, cerrarModal, selectedUser }) => {
       }
 
       const result = await response.json();
-      console.log("Cita creada exitosamente:", result);
+      alert("Cita creada exitosamente:", result);
     } catch (error) {
-      console.error("Error al guardar el turno:", error);
+      alert("Error al guardar el turno:", error);
     }
   };
 

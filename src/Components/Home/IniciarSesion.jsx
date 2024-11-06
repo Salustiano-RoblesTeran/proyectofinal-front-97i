@@ -9,7 +9,6 @@ const IniciarSesion = ({ show, handleClose,guardarUsuario }) => {
     email: '',
     password: '',
   });
-  const { email, password } = formValues;
   const [errorMessage, setErrorMessage] = useState('');
 
   if (!show) return null;
@@ -25,7 +24,6 @@ const IniciarSesion = ({ show, handleClose,guardarUsuario }) => {
     event.preventDefault();
     setErrorMessage('');
 
-    console.log("Intentando iniciar sesión con:", formValues);
 
     try {
       const result = await authLogin(formValues);
