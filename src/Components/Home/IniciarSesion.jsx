@@ -22,9 +22,12 @@ const IniciarSesion = ({ show, handleClose,guardarUsuario }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage('');
+
+    console.log("Intentando iniciar sesión con:", formValues);
 
     try {
-      const result = await authLogin({ email, password });
+      const result = await authLogin(formValues);
       if (!result || !result.token) {
         setErrorMessage(result?.msg || 'Credenciales incorrectas');
         return;
