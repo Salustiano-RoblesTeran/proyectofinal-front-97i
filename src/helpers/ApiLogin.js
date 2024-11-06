@@ -1,13 +1,13 @@
 const url = "https://comision97i-backfinal.vercel.app/api/login"; 
 
-export const authLogin = async (datos) => {
+export const authLogin = async ({ email, password }) => {
     try {
         const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(datos),
+          body: JSON.stringify({ email, password }),
         });
     
         const data = await response.json();

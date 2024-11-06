@@ -60,7 +60,6 @@ const IniciarSesion = ({ show, handleClose,guardarUsuario }) => {
       data-bs-keyboard="false"
       tabIndex="-1"
       aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
