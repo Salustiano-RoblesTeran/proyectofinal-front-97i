@@ -1,9 +1,8 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './Components/Common/NavBar';
 import HomeScreen from './Pages/HomeScreen';
-import IniciarSesion from './Components/Home/IniciarSesion'; 
+import IniciarSesion from './Components/Home/IniciarSesion';
 import UserScreen from './Pages/UserScreen';
 import PageAdmin from './Pages/PageAdmin';
 import MedicoScreen from './Pages/MedicoScreen';
@@ -25,7 +24,8 @@ function App() {
       setUser(JSON.parse(savedUser));
       console.log("Usuario cargado desde localStorage:", JSON.parse(savedUser));
     }
-  },[localStorage.getItem('user')]);
+    setIsLoading(false); // <-- Aquí actualizamos isLoading a false después de intentar cargar el usuario
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -74,20 +74,8 @@ function App() {
             </ProtectedRoutesMedico>
           }
         />
-          <Route
-          path="/about"
-          element={
-              <AboutScreen />
-          }
-        />
-
-        <Route
-          path="/perfil"
-          element={
-              <PerfilScreen />
-          }
-        />
-
+        <Route path="/about" element={<AboutScreen />} />
+        <Route path="/perfil" element={<PerfilScreen />} />
         <Route path='/error' element={<ErrorScreen/>}/>
       </Routes>
       <Footer />
